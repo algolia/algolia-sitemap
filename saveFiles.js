@@ -8,7 +8,6 @@ function saveSiteMap({
   index,
 }) {
   const file = path.join(
-    __dirname,
     root,
     `${filename}${index === undefined ? '' : '.' + index}.xml`
   );
