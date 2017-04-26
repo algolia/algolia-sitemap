@@ -8,9 +8,9 @@ const algoliaSitemap = require('../');
  * @type {algoliaConfig}
  */
 const algoliaConfig = {
-  appId: 'OFCNCOG2CU',
-  apiKey: '7fbbf572ad4d28eeb9231a2f2198f8a2',
-  indexName: 'npm-search',
+  appId: 'XXXXX',
+  apiKey: 'xxxx',
+  indexName: 'xxxxx',
 };
 
 /**
