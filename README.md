@@ -4,6 +4,8 @@ This is a node library allowing you to generate sitemaps from an Algolia index.
 
 Requires node v6+ (make an issue if this is a problem for you)
 
+It will make sitemaps in a folder of your choosing (for example `/sitemaps`). Then you can upload `/sitemaps/sitemap-index.xml` to Google for good indexing of your pages! 
+
 ## How to use
 
 ```js
