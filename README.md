@@ -73,7 +73,7 @@ These parameters mean:
  */
 ```
 
-You can also take a look at `example.js` for how this looks.
+You can also take a look at `example` folder for how this works.
 
 # License 
 

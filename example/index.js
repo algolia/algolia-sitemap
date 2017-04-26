@@ -1,5 +1,5 @@
 // import the dependency
-const algoliaSitemap = require('algolia-sitemap');
+const algoliaSitemap = require('../');
 
 // set up your API keys
 // make sure the key has "browse" capability
@@ -8,9 +8,9 @@ const algoliaSitemap = require('algolia-sitemap');
  * @type {algoliaConfig}
  */
 const algoliaConfig = {
-  appId: 'XXXXX',
-  apiKey: '7xxxxx',
-  indexName: 'xxxxxx',
+  appId: 'OFCNCOG2CU',
+  apiKey: '7fbbf572ad4d28eeb9231a2f2198f8a2',
+  indexName: 'npm-search',
 };
 
 /**
@@ -53,6 +53,9 @@ function hitToParams(hit) {
  */
 algoliaSitemap({
   algoliaConfig,
-  sitemapLocation: { href: 'https://yoursite.com/sitemaps', path: 'sitemaps' },
+  sitemapLocation: {
+    href: 'https://yoursite.com/sitemaps',
+    path: `${__dirname}/sitemaps`,
+  },
   hitToParams,
 });
