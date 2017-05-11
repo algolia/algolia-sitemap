@@ -2,7 +2,7 @@ const algoliasearch = require('algoliasearch');
 const { createSitemapindex, createSitemap } = require('./sitemap');
 const { saveSiteMap } = require('./saveFiles');
 
-const CHUNK_LENGTH = 50000;
+const CHUNK_SIZE = 50000;
 
 let batch = [];
 let iterator = 0;
@@ -26,10 +26,10 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
     const chunks = [];
     let chunk = [];
     batch.forEach(entry => {
-      if (chunk.length < CHUNK_LENGTH) {
+      if (chunk.length < CHUNK_SIZE) {
         chunk.push(entry);
       }
-      if (chunk.length === CHUNK_LENGTH) {
+      if (chunk.length === CHUNK_SIZE) {
         chunks.push(chunk);
         chunk = [];
       }
@@ -44,7 +44,7 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
     }
     const entries = hits.map(hitToParams).filter(Boolean);
     batch = batch.concat(entries);
-    if (batch.length > CHUNK_LENGTH) {
+    if (batch.length > CHUNK_SIZE) {
       flush();
     }
     if (cursor) {
