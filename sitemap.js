@@ -12,11 +12,11 @@ function createSitemapindex() {
       if (loc) sitemap.ele('loc', loc);
       if (lastmod) sitemap.ele('lastmod', lastmod);
       return index;
-    },
+    }
   };
 }
 
-function createSitemap({ hits, hitToParams }) {
+function createSitemap(entries) {
   const sitemap = builder
     .create('urlset', { encoding: 'utf-8' })
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
@@ -39,25 +39,23 @@ function createSitemap({ hits, hitToParams }) {
       const { languages, hitToURL } = alternates;
       sitemap.att('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
 
-      languages.forEach(language =>
-        url.ele('xhtml:link', {
-          rel: 'alternate',
-          hreflang: language,
-          href: hitToURL(language),
-        })
-      );
+      languages.forEach(language => url.ele('xhtml:link', {
+        rel: 'alternate',
+        hreflang: language,
+        href: hitToURL(language)
+      }));
     }
     return sitemap;
   };
 
-  hits.forEach(hit => addURL(hitToParams(hit)));
+  entries.forEach(addURL);
 
   return {
-    stringify: opts => sitemap.end(opts),
+    stringify: opts => sitemap.end(opts)
   };
 }
 
 module.exports = {
   createSitemapindex,
-  createSitemap,
+  createSitemap
 };
