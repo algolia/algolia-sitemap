@@ -37,7 +37,7 @@ const algoliaConfig = {
 };
 ```
 
-And hitToParams is a function that transforms a hit into a parameters object. This function can return an object of type `Param`, an array of `Params` or false.
+And hitToParams is a function that transforms a hit into a parameters object. This function can return an object of type `Param`, an array of `Param`s or false.
 
 ```js
 function hitToParams({ objectID, modified, downloadsRatio })  {
