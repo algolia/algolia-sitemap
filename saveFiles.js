@@ -13,7 +13,6 @@ function saveSiteMap({
   );
   fs.writeFile(file, sitemap.stringify({ pretty: true }), err => {
     if (err) throw err;
-    //console.log(`written ${file}`);
   });
 }
 
