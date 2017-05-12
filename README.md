@@ -4,7 +4,7 @@ This is a node library allowing you to generate sitemaps from an Algolia index.
 
 Requires node v6+ (make an issue if this is a problem for you)
 
-It will make sitemaps in a folder of your choosing (for example `/sitemaps`). Then you can upload `/sitemaps/sitemap-index.xml` to Google for good indexing of your pages! 
+It will create sitemaps in a folder of your choosing (for example `/sitemaps`). Then you can upload `/sitemaps/sitemap-index.xml` to Google for good indexing of your pages! 
 
 ## How to use
 
@@ -26,24 +26,23 @@ algoliaSitemap({
 });
 ```
 
-Where `algoliaConfig` is setup for your index. Make sure that the API key you use has the "browse" capability
+Where `algoliaConfig` holds the setup for your index. Make sure that the API key you use has the "browse" capability
 
 ```js
 // set up your API keys
-// make sure the key has "browse" capability
 const algoliaConfig = {
   appId: 'XXXXX',
-  apiKey: '7xxxxx',
+  apiKey: 'xxxxxx',  // make sure the key has "browse" capability
   indexName: 'xxxxxx',
 };
 ```
 
-And hitToParams is a function that transforms a hit into a parameters object 
+And hitToParams is a function that transforms a hit into a parameters object. This function can return an object of type `Param`, an array of `Param`s or false.
 
 ```js
 function hitToParams({ objectID, modified, downloadsRatio })  {
   const url = ({ lang, objectID }) =>
-  `https://${lang}.yoursite.com/${lang}/package/${objectID}`;
+  `https://${lang}.yoursite.com/${lang}/detail/${objectID}`;
   const loc = url({ lang: 'en', objectID });
   const lastmod = new Date().toISOString();
   const priority = Math.random();
@@ -73,7 +72,7 @@ These parameters mean:
  */
 ```
 
-You can also take a look at `example` folder for how this works.
+You can also take a look at `examples` folder for how this works.
 
 # License 
 
