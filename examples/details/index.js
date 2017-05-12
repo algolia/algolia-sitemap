@@ -31,7 +31,7 @@ const algoliaConfig = {
  */
 function hitToParams(hit) {
   const url = ({ lang, objectID }) =>
-    `https://${lang}.yoursite.com/${lang}/package/${objectID}`;
+    `https://${lang}.yoursite.com/${lang}/detail/${objectID}`;
   const loc = url({ lang: 'en', objectID: hit.objectID });
   const lastmod = new Date().toISOString();
   const priority = Math.random();

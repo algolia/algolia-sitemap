@@ -13,7 +13,7 @@ function hitToParams({ objectID, category }) {
   }
   category.forEach(c => (alreadyAdded[c] = c));
   return category.map(c => ({
-    loc: `https://yoursite.com/${c}`
+    loc: `https://yoursite.com/category/${c}`
   }));
 }
 
