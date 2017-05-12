@@ -11,8 +11,8 @@ It will create sitemaps in a folder of your choosing (for example `/sitemaps`). 
 First install the module from `npm` (or with `yarn`): 
 
 ```sh
-$ npm install --save-dev algolia-sitemap
-$ yarn add --dev algolia-sitemap
+$ npm install algolia-sitemap --save[-dev]
+$ yarn add algolia-sitemap [--dev]
 ```
 
 ```js
