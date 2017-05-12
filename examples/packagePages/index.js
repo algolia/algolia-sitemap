@@ -1,5 +1,5 @@
 // import the dependency
-const algoliaSitemap = require('../');
+const algoliaSitemap = require('../../');
 
 // set up your API keys
 // make sure the key has "browse" capability
