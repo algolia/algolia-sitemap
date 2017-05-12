@@ -42,8 +42,12 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
     if (!hits) {
       return;
     }
-    const entries = hits.map(hitToParams).filter(Boolean);
-    batch = batch.concat(entries);
+    batch = batch.concat(
+      hits.reduce((entries, hit) => {
+        const entry = hitToParams(hit);
+        return entry ? entries.concat(entry) : entries;
+      }, [])
+    );
     if (batch.length > CHUNK_SIZE) {
       flush();
     }
