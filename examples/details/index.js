@@ -1,5 +1,5 @@
 // import the dependency
-const algoliaSitemap = require('../../');
+const algoliaSitemap = require('../../build');
 
 // set up your API keys
 // make sure the key has "browse" capability
@@ -8,9 +8,9 @@ const algoliaSitemap = require('../../');
  * @type {algoliaConfig}
  */
 const algoliaConfig = {
-  appId: 'XXXXX',
-  apiKey: 'xxxx',
-  indexName: 'xxxxx',
+  appId: 'APP_ID',
+  apiKey: 'API_KEY',
+  indexName: 'NAME',
 };
 
 /**
@@ -31,7 +31,7 @@ const algoliaConfig = {
  */
 function hitToParams(hit) {
   const url = ({ lang, objectID }) =>
-    `https://${lang}.yoursite.com/${lang}/detail/${objectID}`;
+    `https://${lang}.yoursite.com/detail/${objectID}`;
   const loc = url({ lang: 'en', objectID: hit.objectID });
   const lastmod = new Date().toISOString();
   const priority = Math.random();
