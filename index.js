@@ -5,21 +5,20 @@ const { saveSiteMap } = require('./saveFiles');
 const CHUNK_SIZE = 50000;
 
 let batch = [];
-let iterator = 0;
 
 function init({ algoliaConfig, sitemapLocation, hitToParams }) {
   const client = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
   const index = client.initIndex(algoliaConfig.indexName);
-  const sitemapIndex = createSitemapindex();
+  const sitemaps = [];
 
   const handleSitemap = entries => {
+    const iterator = sitemaps.length;
     const sitemap = createSitemap(entries);
     saveSiteMap({ sitemap, index: iterator, root: sitemapLocation.path });
-    sitemapIndex.addSitemap({
+    sitemaps.push({
       loc: `${sitemapLocation.href}/sitemap.${iterator}.xml`,
-      lastmod: new Date().toISOString()
+      lastmod: new Date().toISOString(),
     });
-    iterator++;
   };
 
   const flush = () => {
@@ -55,6 +54,7 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
       index.browseFrom(cursor).then(aggregator);
     } else {
       handleSitemap(batch);
+      const sitemapIndex = createSitemapindex(sitemaps);
       saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
     }
   };

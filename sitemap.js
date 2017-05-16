@@ -1,61 +1,57 @@
-const builder = require('xmlbuilder');
+const jsxString = require('jsx-string');
 
-function createSitemapindex() {
-  const index = builder
-    .create('sitemapindex', { encoding: 'utf-8' })
-    .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+const XML = content =>
+  `<?xml version="1.0" encoding="utf-8"?>${jsxString(content)}`;
+
+function createSitemapindex(sitemaps = []) {
+  const sitemap = ({ loc, lastmod }) => (
+    <sitemap>
+      <loc>{loc}</loc>
+      {lastmod && <lastmod>{lastmod}</lastmod>}
+    </sitemap>
+  );
+
+  const index = (
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      {sitemaps.map(sitemap)}
+    </sitemapindex>
+  );
 
   return {
-    stringify: opts => index.end(opts),
-    addSitemap: ({ loc, lastmod }) => {
-      const sitemap = index.ele('sitemap');
-      if (loc) sitemap.ele('loc', loc);
-      if (lastmod) sitemap.ele('lastmod', lastmod);
-      return index;
-    }
+    stringify: () => XML(index),
   };
 }
 
-function createSitemap(entries) {
-  const sitemap = builder
-    .create('urlset', { encoding: 'utf-8' })
-    .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+function createSitemap(entries = []) {
+  const _alternates = ({ languages, hitToURL }) =>
+    languages
+      .map(language => ({ language, href: hitToURL(language) }))
+      .map(({ language, href }) => (
+        <xhtml_link rel="alternate" hreflang={language} href={href} />
+      ));
 
-  const addURL = ({ loc, lastmod, changefreq, priority, alternates }) => {
-    const url = sitemap.ele('url');
-    if (loc != null) {
-      url.ele('loc', loc);
-    }
-    if (lastmod != null) {
-      url.ele('lastmod', lastmod);
-    }
-    if (changefreq != null) {
-      url.ele('changefreq', changefreq);
-    }
-    if (priority != null) {
-      url.ele('priority', priority);
-    }
-    if (alternates != null) {
-      const { languages, hitToURL } = alternates;
-      sitemap.att('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
+  const url = ({ loc, lastmod, changefreq, priority, alternates }) => (
+    <url xmlns_xhtml={!alternates ? 'http://www.w3.org/1999/xhtml' : undefined}>
+      <loc>{loc}</loc>
+      {lastmod && <lastmod>{lastmod}</lastmod>}
+      {changefreq && <changefreq>{changefreq}</changefreq>}
+      {priority && <priority>{priority}</priority>}
+      {_alternates(alternates)}
+    </url>
+  );
 
-      languages.forEach(language => url.ele('xhtml:link', {
-        rel: 'alternate',
-        hreflang: language,
-        href: hitToURL(language)
-      }));
-    }
-    return sitemap;
-  };
-
-  entries.forEach(addURL);
+  const sitemap = (
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      {entries.map(url)}
+    </urlset>
+  );
 
   return {
-    stringify: opts => sitemap.end(opts)
+    stringify: () => XML(sitemap),
   };
 }
 
 module.exports = {
   createSitemapindex,
-  createSitemap
+  createSitemap,
 };
