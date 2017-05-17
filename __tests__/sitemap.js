@@ -29,7 +29,7 @@ describe('sitemap', () => {
     const entries = [
       {
         loc: 'https://www.example.com',
-        lastmod: new Date().toISOString(),
+        lastmod: new Date(1).toISOString(),
         changefreq: 'daily',
         priority: 0,
       },
