@@ -1,12 +1,12 @@
-const algoliaSitemap = require("../../");
+const algoliaSitemap = require('../../build');
 
 /**
  * @type {algoliaConfig}
  */
 const algoliaConfig = {
-  appId: "APP_ID",
-  apiKey: "API_KEY",
-  indexName: "NAME"
+  appId: 'APP_ID',
+  apiKey: 'API_KEY',
+  indexName: 'NAME',
 };
 
 const alreadyAdded = {};
@@ -27,13 +27,13 @@ const alreadyAdded = {};
  * @param {Object} hit a hit to transform
  * @returns {Params|Array.<Params>} the parameters for this hit
  */
-function hitToParams({ objectID, category }) {
+function hitToParams({ category }) {
   if (!category || !category.length || category.some(c => alreadyAdded[c])) {
     return false;
   }
   category.forEach(c => (alreadyAdded[c] = c));
   return category.map(c => ({
-    loc: `https://yoursite.com/category/${c}`
+    loc: `https://yoursite.com/category/${c}`,
   }));
 }
 
@@ -45,8 +45,8 @@ function hitToParams({ objectID, category }) {
 algoliaSitemap({
   algoliaConfig,
   sitemapLocation: {
-    href: "https://yoursite.com/sitemaps",
-    path: "sitemaps"
+    href: 'https://yoursite.com/sitemaps',
+    path: 'sitemaps',
   },
-  hitToParams
+  hitToParams,
 });

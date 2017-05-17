@@ -1,2 +1,3 @@
-sitemaps
+examples/*/sitemaps/*.xml
 node_modules
+build

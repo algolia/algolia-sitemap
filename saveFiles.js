@@ -9,9 +9,9 @@ function saveSiteMap({
 }) {
   const file = path.join(
     root,
-    `${filename}${index === undefined ? '' : '.' + index}.xml`
+    `${filename}${index === undefined ? '' : `.${index}`}.xml`
   );
-  fs.writeFile(file, sitemap.stringify({ pretty: true }), err => {
+  fs.writeFile(file, sitemap.stringify(), err => {
     if (err) throw err;
   });
 }
