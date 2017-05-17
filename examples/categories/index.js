@@ -27,7 +27,7 @@ const alreadyAdded = {};
  * @param {Object} hit a hit to transform
  * @returns {Params|Array.<Params>} the parameters for this hit
  */
-function hitToParams({ objectID, category }) {
+function hitToParams({ category }) {
   if (!category || !category.length || category.some(c => alreadyAdded[c])) {
     return false;
   }

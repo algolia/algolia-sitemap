@@ -10,7 +10,7 @@
   "scripts": {
     "build": "babel *.js -d build",
     "postinstall": "npm run build",
-    "test": "jest"
+    "test": "eslint . && jest"
   },
   "dependencies": {
     "algoliasearch": "^3.22.1",
@@ -21,7 +21,10 @@
     "babel-jest": "^20.0.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.4.0",
+    "eslint": "^3.19.0",
+    "eslint-config-algolia": "^8.0.0",
     "jest": "^20.0.1",
+    "jest-serializer-html": "^3.0.0",
     "pretty-data": "^0.40.0"
   }
 }
