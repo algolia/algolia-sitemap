@@ -31,12 +31,12 @@ function createSitemap(entries = []) {
       ));
 
   const url = ({ loc, lastmod, changefreq, priority, alternates }) => (
-    <url xmlns_xhtml={!alternates ? 'http://www.w3.org/1999/xhtml' : undefined}>
+    <url xmlns_xhtml={alternates ? 'http://www.w3.org/1999/xhtml' : undefined}>
       <loc>{loc}</loc>
       {lastmod && <lastmod>{lastmod}</lastmod>}
       {changefreq && <changefreq>{changefreq}</changefreq>}
       {priority && <priority>{priority}</priority>}
-      {_alternates(alternates)}
+      {alternates && _alternates(alternates)}
     </url>
   );
 
