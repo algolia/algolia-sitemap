@@ -2,9 +2,18 @@
 
 This is a node library allowing you to generate sitemaps from an Algolia index. 
 
-Requires node v6+ (make an issue if this is a problem for you)
+>Requires node v6+ (make an issue if this is a problem for you).
 
-It will create sitemaps in a folder of your choosing (for example `/sitemaps`). Then you can upload `/sitemaps/sitemap-index.xml` to Google for good indexing of your pages! 
+It will create sitemaps in a folder of your choosing (for example `/sitemaps`). Then you can upload `/sitemaps/sitemap-index.xml` to Google for good indexing of your pages!
+
+## How does it work?
+
+1. [Browse](https://www.algolia.com/doc/api-client/javascript/advanced/#backup--export-an-index) over all entries in an Algolia index
+2. Per [50 000](https://support.google.com/webmasters/answer/183668?hl=en) links, a sitemap.n.xml is generated in the chosen folder (where n is the index)
+3. Once all Algolia data has been browsed over, a final sitemap-index.xml is being generated
+4. Let search engines know about sitemap-index.xml either by [letting them know](https://support.google.com/webmasters/answer/183668?hl=en#addsitemap) or putting it in [robots.txt](https://support.google.com/webmasters/answer/183668?hl=en#addsitemap)
+
+This process is a script that should be ran periodically to keep the sitemaps up to date, no "watch" feature has been put in place (yet?)
 
 ## How to use
 
