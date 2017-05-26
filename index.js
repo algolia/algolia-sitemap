@@ -17,7 +17,7 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
     saveSiteMap({ sitemap, index: iterator, root: sitemapLocation.path });
     sitemaps.push({
       loc: `${sitemapLocation.href}/sitemap.${iterator}.xml`,
-      lastmod: new Date().toISOString(),
+      lastmod: new Date().toISOString()
     });
   };
 
@@ -51,7 +51,7 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
       flush();
     }
     if (cursor) {
-      index.browseFrom(cursor).then(aggregator);
+      index.browseFrom(cursor).then(aggregator).catch(console.error);
     } else {
       handleSitemap(batch);
       const sitemapIndex = createSitemapindex(sitemaps);
@@ -59,7 +59,7 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
     }
   };
 
-  index.browse().then(aggregator);
+  index.browse().then(aggregator).catch(console.error);
 }
 
 module.exports = init;
