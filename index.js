@@ -37,26 +37,25 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
     batch = chunk;
   };
 
-  const aggregator = ({ hits, cursor }) => {
-    if (!hits) {
-      return;
-    }
-    batch = batch.concat(
-      hits.reduce((entries, hit) => {
-        const entry = hitToParams(hit);
-        return entry ? entries.concat(entry) : entries;
-      }, [])
-    );
-    if (batch.length > CHUNK_SIZE) {
-      flush();
-    }
-    if (cursor) {
-      index.browseFrom(cursor).then(aggregator);
-    } else {
-      handleSitemap(batch);
-      const sitemapIndex = createSitemapindex(sitemaps);
-      saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
-    }
+  const aggregator = async ({ hits, cursor }) => {
+    do {
+      if (!hits) {
+        return;
+      }
+      batch = batch.concat(
+        hits.reduce((entries, hit) => {
+          const entry = hitToParams(hit);
+          return entry ? entries.concat(entry) : entries;
+        }, [])
+      );
+      if (batch.length > CHUNK_SIZE) {
+        flush();
+      }
+      ({ hits, cursor } = await index.browseFrom(cursor));
+    } while (cursor);
+    handleSitemap(batch);
+    const sitemapIndex = createSitemapindex(sitemaps);
+    saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
   };
 
   return index.browse().then(aggregator);
