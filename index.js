@@ -11,17 +11,18 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
   const index = client.initIndex(algoliaConfig.indexName);
   const sitemaps = [];
 
-  const handleSitemap = entries => {
-    const iterator = sitemaps.length;
-    const sitemap = createSitemap(entries);
-    saveSiteMap({ sitemap, index: iterator, root: sitemapLocation.path });
+  const handleSitemap = async entries => {
     sitemaps.push({
-      loc: `${sitemapLocation.href}/sitemap.${iterator}.xml`,
+      loc: `${sitemapLocation.href}/${await saveSiteMap({
+        sitemap: createSitemap(entries),
+        index: sitemaps.length,
+        root: sitemapLocation.path,
+      })}`,
       lastmod: new Date().toISOString(),
     });
   };
 
-  const flush = () => {
+  const flush = async () => {
     const chunks = [];
     let chunk = [];
     batch.forEach(entry => {
@@ -33,7 +34,7 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
         chunk = [];
       }
     });
-    chunks.forEach(handleSitemap);
+    await Promise.all(chunks.map(handleSitemap));
     batch = chunk;
   };
 
@@ -49,11 +50,11 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
         }, [])
       );
       if (batch.length > CHUNK_SIZE) {
-        flush();
+        await flush();
       }
       ({ hits, cursor } = await index.browseFrom(cursor));
     } while (cursor);
-    handleSitemap(batch);
+    await handleSitemap(batch);
     const sitemapIndex = createSitemapindex(sitemaps);
     saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
   };
