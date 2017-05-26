@@ -11,7 +11,7 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
   const index = client.initIndex(algoliaConfig.indexName);
   const sitemaps = [];
 
-  const handleSitemap = async entries => {
+  const handleSitemap = async entries =>
     sitemaps.push({
       loc: `${sitemapLocation.href}/${await saveSiteMap({
         sitemap: createSitemap(entries),
@@ -20,7 +20,6 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
       })}`,
       lastmod: new Date().toISOString(),
     });
-  };
 
   const flush = async () => {
     const chunks = [];
