@@ -13,18 +13,22 @@
     "test": "eslint . && jest"
   },
   "dependencies": {
-    "algoliasearch": "^3.22.1",
+    "algoliasearch": "^3.22.2",
     "jsx-string": "^2.0.0"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "jest-serializer-html"
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-jest": "^20.0.1",
+    "babel-jest": "^20.0.3",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.4.0",
+    "babel-preset-env": "^1.5.1",
     "eslint": "^3.19.0",
     "eslint-config-algolia": "^8.0.0",
-    "jest": "^20.0.1",
-    "jest-serializer-html": "^3.0.0",
-    "pretty-data": "^0.40.0"
+    "jest": "^20.0.4",
+    "jest-serializer-html": "^4.0.0"
   }
 }
