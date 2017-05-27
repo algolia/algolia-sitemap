@@ -50,7 +50,8 @@ exports[`sitemap renders with multiple optional entries 1`] = `
   <url>
     <loc>https://www.example.com</loc>
     <lastmod>1970-01-01T00:00:00.001Z</lastmod>
-    <changefreq>daily</changefreq>0
+    <changefreq>daily</changefreq>
+    <priority>0</priority>
   </url>
   <url>
     <loc>https://www.example.com/test</loc>
