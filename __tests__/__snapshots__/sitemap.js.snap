@@ -39,11 +39,11 @@ exports[`sitemap renders with alternatives 1`] = `
                 hreflang="en"
                 href="https://en.example.com"
     >
-      <xhtml:link rel="alternate"
-                  hreflang="fr"
-                  href="https://fr.example.com"
-      >
-      </xhtml:link>
+    </xhtml:link>
+    <xhtml:link rel="alternate"
+                hreflang="fr"
+                href="https://fr.example.com"
+    >
     </xhtml:link>
   </url>
 </urlset>

@@ -1120,8 +1120,8 @@ diff@^3.2.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.2.0.tgz#c9ce393a4b7cbd0b058a725c93df299027868ff9"
 
 diffable-html@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/diffable-html/-/diffable-html-2.0.1.tgz#8f5e115f0c27e84a956c0a3278b4c5db7a8c49ec"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/diffable-html/-/diffable-html-2.1.0.tgz#0d4c2de115ac58f904aab1b72e6649cefca5f025"
   dependencies:
     htmlparser2 "^3.9.2"
 
@@ -2355,7 +2355,7 @@ jest-validate@^20.0.3:
     leven "^2.1.0"
     pretty-format "^20.0.3"
 
-jest@^20.0.4:
+jest@^20.0.1:
   version "20.0.4"
   resolved "https://registry.yarnpkg.com/jest/-/jest-20.0.4.tgz#3dd260c2989d6dad678b1e9cc4d91944f6d602ac"
   dependencies:
