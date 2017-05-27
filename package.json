@@ -8,12 +8,10 @@
     "url": "https://github.com/algolia/algolia-sitemap.git"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "build": "babel *.js -d build",
     "postinstall": "npm run build",
     "test": "eslint . && jest"
-  },
-  "scripts": {
-    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
