@@ -39,8 +39,8 @@ function hitToParams({ category }) {
 
 /**
  * @param {algoliaConfig} algoliaConfig configuration for Algolia
- * @param {Object} sitemapLoc href of your sitemap, used to build the sitemap index
- * @param {Object} outputFolder relative path where your sitemaps will be outputed
+ * @param {string} sitemapLoc href of your sitemap, used to build the sitemap index
+ * @param {string} outputFolder relative path where your sitemaps will be outputed
  * @param {function} hitToParams function to transform a hit into Params
  */
 algoliaSitemap({
