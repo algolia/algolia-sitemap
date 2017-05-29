@@ -55,7 +55,7 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
     } while (cursor);
     await handleSitemap(batch);
     const sitemapIndex = createSitemapindex(sitemaps);
-    saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
+    await saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
   };
 
   return index.browse().then(aggregator);
