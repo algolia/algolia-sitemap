@@ -48,15 +48,14 @@ function hitToParams(hit) {
 
 /**
  * @param {algoliaConfig} algoliaConfig configuration for Algolia
- * @param {Object} sitemapLocation an object with the href where your sitemaps will be and the relative path where to generate them
+ * @param {Object} sitemapLoc href of your sitemap, used to build the sitemap index
+ * @param {Object} outputFolder relative path where your sitemaps will be outputed
  * @param {function} hitToParams function to transform a hit into Params
  */
 algoliaSitemap({
   algoliaConfig,
-  sitemapLocation: {
-    href: 'https://yoursite.com/sitemaps',
-    path: `${__dirname}/sitemaps`,
-  },
+  sitemapLoc: 'https://yoursite.com/sitemaps',
+  outputFolder: `${__dirname}/sitemaps`,
   hitToParams,
 })
   .then(() => {
