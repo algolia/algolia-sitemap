@@ -11,17 +11,17 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
   const index = client.initIndex(algoliaConfig.indexName);
   const sitemaps = [];
 
-  const handleSitemap = entries => {
-    const iterator = sitemaps.length;
-    const sitemap = createSitemap(entries);
-    saveSiteMap({ sitemap, index: iterator, root: sitemapLocation.path });
+  const handleSitemap = async entries =>
     sitemaps.push({
-      loc: `${sitemapLocation.href}/sitemap.${iterator}.xml`,
+      loc: `${sitemapLocation.href}/${await saveSiteMap({
+        sitemap: createSitemap(entries),
+        index: sitemaps.length,
+        root: sitemapLocation.path,
+      })}`,
       lastmod: new Date().toISOString(),
     });
-  };
 
-  const flush = () => {
+  const flush = async () => {
     const chunks = [];
     let chunk = [];
     batch.forEach(entry => {
@@ -33,33 +33,32 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
         chunk = [];
       }
     });
-    chunks.forEach(handleSitemap);
+    await Promise.all(chunks.map(handleSitemap));
     batch = chunk;
   };
 
-  const aggregator = ({ hits, cursor }) => {
-    if (!hits) {
-      return;
-    }
-    batch = batch.concat(
-      hits.reduce((entries, hit) => {
-        const entry = hitToParams(hit);
-        return entry ? entries.concat(entry) : entries;
-      }, [])
-    );
-    if (batch.length > CHUNK_SIZE) {
-      flush();
-    }
-    if (cursor) {
-      index.browseFrom(cursor).then(aggregator);
-    } else {
-      handleSitemap(batch);
-      const sitemapIndex = createSitemapindex(sitemaps);
-      saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
-    }
+  const aggregator = async ({ hits, cursor }) => {
+    do {
+      if (!hits) {
+        return;
+      }
+      batch = batch.concat(
+        hits.reduce((entries, hit) => {
+          const entry = hitToParams(hit);
+          return entry ? entries.concat(entry) : entries;
+        }, [])
+      );
+      if (batch.length > CHUNK_SIZE) {
+        await flush();
+      }
+      ({ hits, cursor } = await index.browseFrom(cursor));
+    } while (cursor);
+    await handleSitemap(batch);
+    const sitemapIndex = createSitemapindex(sitemaps);
+    await saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
   };
 
-  index.browse().then(aggregator);
+  return index.browse().then(aggregator);
 }
 
 module.exports = init;

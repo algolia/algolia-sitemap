@@ -49,4 +49,8 @@ algoliaSitemap({
     path: 'sitemaps',
   },
   hitToParams,
-});
+})
+  .then(() => {
+    console.log('Done generating sitemaps'); // eslint-disable-line no-console
+  })
+  .catch(console.error); // eslint-disable-line no-console
