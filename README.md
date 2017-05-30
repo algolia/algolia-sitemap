@@ -30,7 +30,8 @@ const algoliaSitemap = require('algolia-sitemap');
 
 algoliaSitemap({
   algoliaConfig,
-  sitemapLocation: { href: 'https://yoursite.com/sitemaps', path: 'sitemaps' },
+  sitemapLoc: 'https://yoursite.com/sitemaps'
+  outputFolder: 'sitemaps',
   hitToParams,
 });
 ```
@@ -81,7 +82,27 @@ These parameters mean:
  */
 ```
 
-You can also take a look at `examples` folder for how this works.
+## Custom queries
+You can pass a `query` and a `params` parameter to `algoliaSitemap`. This allows you to narrow down the returned results.
+For instance, in order to have `hitToParams` called for every products in the `phone` category, we could do:
+
+```js
+algoliaSitemap({
+  algoliaConfig,
+  sitemapLoc: 'https://yoursite.com/sitemaps'
+  outputFolder: 'sitemaps',
+  params: {
+    filters: 'category: phone'
+  }
+  hitToParams,
+});
+```
+
+## Examples
+You can also take a look at `examples` folder for how it works.
+
+* To generate a sitemap of all the hits in an index, check the [detail pages example](examples/details)
+* To generate a sitemap of all the category pages, check the [category pages example](examples/category)
 
 # License 
 

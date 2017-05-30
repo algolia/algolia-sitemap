@@ -6,7 +6,14 @@ const CHUNK_SIZE = 50000;
 
 let batch = [];
 
-function init({ algoliaConfig, sitemapLoc, outputFolder, hitToParams }) {
+function init({
+  algoliaConfig,
+  query,
+  params,
+  sitemapLoc,
+  outputFolder,
+  hitToParams,
+}) {
   const client = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
   const index = client.initIndex(algoliaConfig.indexName);
   const sitemaps = [];
@@ -62,7 +69,7 @@ function init({ algoliaConfig, sitemapLoc, outputFolder, hitToParams }) {
     });
   };
 
-  return index.browse().then(aggregator);
+  return index.browse(query, params).then(aggregator);
 }
 
 module.exports = init;
