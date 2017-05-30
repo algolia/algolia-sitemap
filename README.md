@@ -83,7 +83,7 @@ These parameters mean:
 ```
 
 ## Custom queries
-You can pass a `query` and a `params` parameter to `algoliaSitemap`. This allows you to narrow down the returned results.
+You can pass a `params` parameter to `algoliaSitemap`. This allows you to narrow down the returned results.
 For instance, in order to have `hitToParams` called for every products in the `phone` category, we could do:
 
 ```js
@@ -97,6 +97,8 @@ algoliaSitemap({
   hitToParams,
 });
 ```
+
+Note that a query can also be passed to `params`.
 
 ## Examples
 You can also take a look at `examples` folder for how it works.

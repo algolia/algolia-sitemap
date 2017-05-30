@@ -8,7 +8,6 @@ let batch = [];
 
 function init({
   algoliaConfig,
-  query,
   params,
   sitemapLoc,
   outputFolder,
@@ -69,7 +68,7 @@ function init({
     });
   };
 
-  return index.browse(query, params).then(aggregator);
+  return index.browse(params).then(aggregator);
 }
 
 module.exports = init;
