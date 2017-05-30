@@ -6,17 +6,17 @@ const CHUNK_SIZE = 50000;
 
 let batch = [];
 
-function init({ algoliaConfig, sitemapLocation, hitToParams }) {
+function init({ algoliaConfig, sitemapLoc, outputFolder, hitToParams }) {
   const client = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
   const index = client.initIndex(algoliaConfig.indexName);
   const sitemaps = [];
 
   const handleSitemap = async entries =>
     sitemaps.push({
-      loc: `${sitemapLocation.href}/${await saveSiteMap({
+      loc: `${sitemapLoc}/${await saveSiteMap({
         sitemap: createSitemap(entries),
         index: sitemaps.length,
-        root: sitemapLocation.path,
+        root: outputFolder,
       })}`,
       lastmod: new Date().toISOString(),
     });
@@ -55,7 +55,11 @@ function init({ algoliaConfig, sitemapLocation, hitToParams }) {
     } while (cursor);
     await handleSitemap(batch);
     const sitemapIndex = createSitemapindex(sitemaps);
-    await saveSiteMap({ sitemap: sitemapIndex, filename: 'sitemap-index' });
+    await saveSiteMap({
+      sitemap: sitemapIndex,
+      root: outputFolder,
+      filename: 'sitemap-index',
+    });
   };
 
   return index.browse().then(aggregator);
