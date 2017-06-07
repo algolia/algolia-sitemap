@@ -44,6 +44,31 @@ describe('sitemap', () => {
     expect(str(sitemap)).toMatchSnapshot();
   });
 
+  it(`Ensures priority is between 0 and 1`, () => {
+    [
+      {
+        loc: 'https://www.example.com/test',
+        priority: NaN,
+      },
+      {
+        loc: 'https://www.example.com/test',
+        priority: '0',
+      },
+      {
+        loc: 'https://www.example.com/test',
+        priority: -5,
+      },
+      {
+        loc: 'https://www.example.com/test',
+        priority: 1.1,
+      },
+    ].forEach(entry => {
+      expect(() => {
+        createSitemap([entry]);
+      }).toThrow();
+    });
+  });
+
   it('renders with alternatives', () => {
     const entries = [
       {
