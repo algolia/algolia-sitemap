@@ -22,8 +22,6 @@ function createSitemapindex(sitemaps = []) {
   };
 }
 
-const notNull = item => item !== null && item !== undefined;
-
 function createSitemap(entries = []) {
   const _alternates = ({ languages, hitToURL }) =>
     languages
@@ -37,7 +35,7 @@ function createSitemap(entries = []) {
       <loc>{loc}</loc>
       {lastmod && <lastmod>{lastmod}</lastmod>}
       {changefreq && <changefreq>{changefreq}</changefreq>}
-      {notNull(priority) ? <priority>{priority}</priority> : null}
+      {Number.isFinite(priority) ? <priority>{priority}</priority> : null}
       {alternates && _alternates(alternates)}
     </url>
   );
