@@ -7,12 +7,18 @@ function saveSiteMap({
   filename = 'sitemap',
   index,
 }) {
-  const file = path.join(
-    root,
-    `${filename}${index === undefined ? '' : `.${index}`}.xml`
-  );
-  fs.writeFile(file, sitemap.stringify(), err => {
-    if (err) throw err;
+  return new Promise((resolve, reject) => {
+    const file = path.join(
+      root,
+      `${filename}${index === undefined ? '' : `.${index}`}.xml`
+    );
+    fs.writeFile(file, sitemap.stringify(), err => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(file);
+    });
   });
 }
 
