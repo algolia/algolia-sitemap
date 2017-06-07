@@ -23,6 +23,35 @@ function createSitemapindex(sitemaps = []) {
 }
 
 const isValidURL = ({ loc, lastmod, changefreq, priority, alternates }) => {
+  // loc
+  if (!loc) {
+    throw new Error(`loc "${loc}" was not valid. It's required.`);
+  }
+
+  // lastmod
+
+  // changefreq
+  const allowedFreqs = [
+    'always',
+    'hourly',
+    'daily',
+    'weekly',
+    'monthly',
+    'yearly',
+    'never',
+  ];
+
+  if (!allowedFreqs.includes(changefreq) && changefreq !== undefined) {
+    throw new Error(
+      `changefreq "${changefreq}" was not a valid value.
+
+expected: ${allowedFreqs.join(', ')}
+
+see https://www.sitemaps.org/protocol.html for more information`
+    );
+  }
+
+  // priority
   if (
     priority < 0 ||
     priority > 1 ||
