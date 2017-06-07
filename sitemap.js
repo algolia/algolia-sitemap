@@ -1,4 +1,5 @@
 const jsxString = require('jsx-string');
+const validator = require('validator');
 
 const XML = content =>
   `<?xml version="1.0" encoding="utf-8"?>${jsxString(content)}`;
@@ -24,11 +25,25 @@ function createSitemapindex(sitemaps = []) {
 
 const isValidURL = ({ loc, lastmod, changefreq, priority, alternates }) => {
   // loc
-  if (!loc) {
-    throw new Error(`loc "${loc}" was not valid. It's required.`);
+  if (!loc && !validator.isURL(loc, { require_valid_protocol: true })) {
+    throw new Error(
+      `loc "${loc}" was not valid. It's required.
+
+see https://www.sitemaps.org/protocol.html`
+    );
   }
 
   // lastmod
+  if (lastmod !== undefined && !validator.isISO8601(lastmod)) {
+    throw new Error(
+      `lastmod "${lastmod}" is not valid. It should be a valid ISO 8601 date
+
+Try using new Date().toISOString()
+
+see https://www.sitemaps.org/protocol.html
+see https://www.w3.org/TR/NOTE-datetime`
+    );
+  }
 
   // changefreq
   const allowedFreqs = [

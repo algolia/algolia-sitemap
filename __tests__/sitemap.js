@@ -61,6 +61,20 @@ describe('sitemap', () => {
       });
     });
 
+    it('ensures lastmod is a w3c date', () => {
+      [
+        { loc: 'https://example.com', lastmod: '' },
+        { loc: 'https://example.com', lastmod: '15 august' },
+        { loc: 'https://example.com', lastmod: new Date(1) },
+        { loc: 'https://example.com', lastmod: new Date(1).toString() },
+        { loc: 'https://example.com', lastmod: new Date(1).toDateString() },
+      ].forEach(entry => {
+        expect(() => {
+          createSitemap([entry]);
+        }).toThrow();
+      });
+    });
+
     it('ensures priority is between 0 and 1', () => {
       [
         {

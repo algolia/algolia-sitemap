@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "algoliasearch": "^3.22.1",
-    "jsx-string": "^2.0.0"
+    "jsx-string": "^2.0.0",
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
