@@ -79,6 +79,30 @@ see https://www.sitemaps.org/protocol.html for more information`
     );
   }
 
+  // alternates
+  const _alternatesError = `alternates ${JSON.stringify(alternates)} was not valid. An object with
+
+{
+  languages: ['nl-BE', 'fr', 'pt-BR'],
+  hitToURL: (language) => \`the url for that \${language}\`,
+}
+
+was expected.`;
+
+  if (alternates !== undefined) {
+    if (!(alternates.languages instanceof Array)) {
+      throw new Error(_alternatesError);
+    }
+    if (typeof alternates.hitToURL !== 'function') {
+      throw new Error(_alternatesError);
+    }
+    alternates.languages.forEach(lang => {
+      if (!validator.isURL(alternates.hitToURL(lang))) {
+        throw new Error(_alternatesError);
+      }
+    });
+  }
+
   return {
     loc,
     lastmod,

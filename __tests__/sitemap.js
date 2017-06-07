@@ -41,6 +41,20 @@ describe('sitemap', () => {
     expect(sitemap.stringify()).toMatchSnapshot();
   });
 
+  it('renders with alternatives', () => {
+    const entries = [
+      {
+        loc: 'https://www.example.com',
+        alternates: {
+          languages: ['en', 'fr'],
+          hitToURL: lang => `https://${lang}.example.com`,
+        },
+      },
+    ];
+    const sitemap = createSitemap(entries);
+    expect(sitemap.stringify()).toMatchSnapshot();
+  });
+
   describe('Validation', () => {
     it('ensures loc is required', () => {
       [
@@ -117,20 +131,32 @@ describe('sitemap', () => {
         }).toThrow();
       });
     });
-  });
 
-  it('renders with alternatives', () => {
-    const entries = [
-      {
-        loc: 'https://www.example.com',
-        alternates: {
-          languages: ['en', 'fr'],
-          hitToURL: lang => `https://${lang}.example.com`,
+    it('ensures alternates are returning urls', () => {
+      [
+        {
+          loc: 'https://www.example.com/test',
+          alternates: {},
         },
-      },
-    ];
-    const sitemap = createSitemap(entries);
-    expect(sitemap.stringify()).toMatchSnapshot();
+        {
+          loc: 'https://www.example.com/test',
+          alternates: {
+            languages: '',
+          },
+        },
+        {
+          loc: 'https://www.example.com/test',
+          alternates: {
+            languages: [''],
+            hitToURL: () => 'invalid url',
+          },
+        },
+      ].forEach(entry => {
+        expect(() => {
+          createSitemap([entry]);
+        }).toThrow();
+      });
+    });
   });
 });
 
