@@ -54,6 +54,110 @@ describe('sitemap', () => {
     const sitemap = createSitemap(entries);
     expect(sitemap.stringify()).toMatchSnapshot();
   });
+
+  describe('Validation', () => {
+    it('ensures loc is required', () => {
+      [
+        {},
+        {
+          changefreq: 'weekly',
+        },
+        {
+          alternates: [],
+        },
+      ].forEach(entry => {
+        expect(() => {
+          createSitemap([entry]);
+        }).toThrow();
+      });
+    });
+
+    it('ensures lastmod is a w3c date', () => {
+      [
+        { loc: 'https://example.com', lastmod: '' },
+        { loc: 'https://example.com', lastmod: '15 august' },
+        { loc: 'https://example.com', lastmod: new Date(1) },
+        { loc: 'https://example.com', lastmod: new Date(1).toString() },
+        { loc: 'https://example.com', lastmod: new Date(1).toDateString() },
+      ].forEach(entry => {
+        expect(() => {
+          createSitemap([entry]);
+        }).toThrow();
+      });
+    });
+
+    it('ensures priority is between 0 and 1', () => {
+      [
+        {
+          loc: 'https://www.example.com/test',
+          priority: NaN,
+        },
+        {
+          loc: 'https://www.example.com/test',
+          priority: '0',
+        },
+        {
+          loc: 'https://www.example.com/test',
+          priority: -5,
+        },
+        {
+          loc: 'https://www.example.com/test',
+          priority: 1.1,
+        },
+      ].forEach(entry => {
+        expect(() => {
+          createSitemap([entry]);
+        }).toThrow();
+      });
+    });
+
+    it('ensures changefreq follows spec', () => {
+      [
+        {
+          loc: 'https://www.example.com/test',
+          changefreq: 'WEEKLY',
+        },
+        {
+          loc: 'https://www.example.com/test',
+          changefreq: '0',
+        },
+        {
+          loc: 'https://www.example.com/test',
+          changefreq: null,
+        },
+      ].forEach(entry => {
+        expect(() => {
+          createSitemap([entry]);
+        }).toThrow();
+      });
+    });
+
+    it('ensures alternates are returning urls', () => {
+      [
+        {
+          loc: 'https://www.example.com/test',
+          alternates: {},
+        },
+        {
+          loc: 'https://www.example.com/test',
+          alternates: {
+            languages: '',
+          },
+        },
+        {
+          loc: 'https://www.example.com/test',
+          alternates: {
+            languages: [''],
+            hitToURL: () => 'invalid url',
+          },
+        },
+      ].forEach(entry => {
+        expect(() => {
+          createSitemap([entry]);
+        }).toThrow();
+      });
+    });
+  });
 });
 
 describe('sitemapindex', () => {

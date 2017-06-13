@@ -86,7 +86,9 @@ exports[`sitemap renders with multiple optional entries 1`] = `
     <changefreq>
       daily
     </changefreq>
-    0
+    <priority>
+      0.0
+    </priority>
   </url>
   <url>
     <loc>
