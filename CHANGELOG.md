@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.1
+
+Fixed build of 2.0.0
+
 ## 2.0.0
 
 * now returns a Promise, you can use this to 
