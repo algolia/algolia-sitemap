@@ -8,16 +8,14 @@ function saveSiteMap({
   index,
 }) {
   return new Promise((resolve, reject) => {
-    const file = path.join(
-      root,
-      `${filename}${index === undefined ? '' : `.${index}`}.xml`
-    );
+    const name = `${filename}${index === undefined ? '' : `.${index}`}.xml`;
+    const file = path.join(root, name);
     fs.writeFile(file, sitemap.stringify(), err => {
       if (err) {
         reject(err);
         return;
       }
-      resolve(file);
+      resolve(name);
     });
   });
 }

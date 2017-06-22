@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.6
+
+Put the relative file path in the sitemap index instead of a full path
+
 ## 2.0.5
 
 Support node v6
