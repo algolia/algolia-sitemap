@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.5
+
+Support node v6
+
 ## 2.0.4
 
 Fixed build steps of 2.0.0
