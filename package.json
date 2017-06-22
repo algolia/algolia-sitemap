@@ -1,6 +1,6 @@
 {
   "name": "algolia-sitemap",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "main": "build/index.js",
   "license": "MIT",
   "repository": {
@@ -8,10 +8,11 @@
     "url": "https://github.com/algolia/algolia-sitemap.git"
   },
   "files": [
-    "build/"
+    "build/*"
   ],
   "scripts": {
     "precommit": "lint-staged",
+    "prepublish": "npm run build",
     "build": "babel *.js -d build",
     "test": "eslint . && jest"
   },
