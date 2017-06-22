@@ -1,8 +1,8 @@
 # Change Log
 
-## 2.0.2
+## 2.0.3
 
-Fixed build of 2.0.0 and 2.0.1
+Fixed build steps of 2.0.0
 
 ## 2.0.0
 

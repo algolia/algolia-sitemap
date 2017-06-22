@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/algolia/algolia-sitemap.git"
   },
+  "files": [
+    "build/"
+  ],
   "scripts": {
     "precommit": "lint-staged",
     "build": "babel *.js -d build",
