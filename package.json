@@ -10,7 +10,6 @@
   "scripts": {
     "precommit": "lint-staged",
     "build": "babel *.js -d build",
-    "postinstall": "npm run build",
     "test": "eslint . && jest"
   },
   "lint-staged": {
