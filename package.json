@@ -20,7 +20,7 @@
   "dependencies": {
     "algoliasearch": "^3.22.2",
     "jsx-string": "^2.0.0",
-    "validator": "^7.0.0"
+    "validator": "^9.0.0"
   },
   "jest": {
     "snapshotSerializers": ["jest-serializer-html"]
