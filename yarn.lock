@@ -1292,9 +1292,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-algolia@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-algolia/-/eslint-config-algolia-8.0.0.tgz#8290b6525451e89155e787da6a6a8435657f3731"
+eslint-config-algolia@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-algolia/-/eslint-config-algolia-9.0.0.tgz#8cfcf985f0447afc08f465ea5d270e756b60d31d"
   dependencies:
     babel-eslint "^7.2.3"
     eslint "^3.19.0"
