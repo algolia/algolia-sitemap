@@ -38,7 +38,7 @@
     "eslint-plugin-jest": "21.2.0",
     "eslint-plugin-prettier": "2.3.1",
     "eslint-plugin-react": "7.4.0",
-    "husky": "0.13.4",
+    "husky": "0.14.3",
     "jest": "20.0.4",
     "jest-serializer-html": "4.0.1",
     "lint-staged": "3.6.1",
