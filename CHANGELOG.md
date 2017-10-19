@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.7
+
+Some chores and updating of dependencies, nothing usage-touching
+
 ## 2.0.6
 
 Put the relative file path in the sitemap index instead of a full path
