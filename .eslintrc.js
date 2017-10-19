@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['algolia'],
+  extends: ['algolia/react', 'algolia/jest', 'algolia'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'import/no-commonjs': 'off',

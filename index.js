@@ -43,7 +43,8 @@ function init({
     batch = chunk;
   };
 
-  const aggregator = async ({ hits, cursor }) => {
+  const aggregator = async args => {
+    let { hits, cursor } = args;
     do {
       if (!hits) {
         return;

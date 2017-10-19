@@ -1,7 +1,7 @@
 const jsxString = require('jsx-string');
 const validator = require('validator');
 
-const XML = content =>
+const xmlStringify = content =>
   `<?xml version="1.0" encoding="utf-8"?>${jsxString(content)}`;
 
 function createSitemapindex(sitemaps = []) {
@@ -19,12 +19,13 @@ function createSitemapindex(sitemaps = []) {
   );
 
   return {
-    stringify: () => XML(index),
+    stringify: () => xmlStringify(index),
   };
 }
 
 const isValidURL = ({ loc, lastmod, changefreq, priority, alternates }) => {
   // loc
+  // eslint-disable-next-line camelcase
   if (!loc && !validator.isURL(loc, { require_valid_protocol: true })) {
     throw new Error(
       `loc "${loc}" was not valid. It's required.
@@ -80,7 +81,9 @@ see https://www.sitemaps.org/protocol.html for more information`
   }
 
   // alternates
-  const _alternatesError = `alternates ${JSON.stringify(alternates)} was not valid. An object with
+  const _alternatesError = `alternates ${JSON.stringify(
+    alternates
+  )} was not valid. An object with
 
 {
   languages: ['nl-BE', 'fr', 'pt-BR'],
@@ -148,7 +151,7 @@ function createSitemap(entries = []) {
   );
 
   return {
-    stringify: () => XML(sitemap),
+    stringify: () => xmlStringify(sitemap),
   };
 }
 
