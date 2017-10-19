@@ -1,5 +1,6 @@
 const jsxString = require('jsx-string');
-const validator = require('validator');
+const isURL = require('validator/lib/isURL');
+const isISO8601 = require('validator/lib/isISO8601');
 
 const xmlStringify = content =>
   `<?xml version="1.0" encoding="utf-8"?>${jsxString(content)}`;
@@ -26,7 +27,7 @@ function createSitemapindex(sitemaps = []) {
 const isValidURL = ({ loc, lastmod, changefreq, priority, alternates }) => {
   // loc
   // eslint-disable-next-line camelcase
-  if (!loc && !validator.isURL(loc, { require_valid_protocol: true })) {
+  if (!loc && !isURL(loc, { require_valid_protocol: true })) {
     throw new Error(
       `loc "${loc}" was not valid. It's required.
 
@@ -35,7 +36,7 @@ see https://www.sitemaps.org/protocol.html`
   }
 
   // lastmod
-  if (lastmod !== undefined && !validator.isISO8601(lastmod)) {
+  if (lastmod !== undefined && !isISO8601(lastmod)) {
     throw new Error(
       `lastmod "${lastmod}" is not valid. It should be a valid ISO 8601 date
 
@@ -100,7 +101,7 @@ was expected.`;
       throw new Error(_alternatesError);
     }
     alternates.languages.forEach(lang => {
-      if (!validator.isURL(alternates.hitToURL(lang))) {
+      if (!isURL(alternates.hitToURL(lang))) {
         throw new Error(_alternatesError);
       }
     });
