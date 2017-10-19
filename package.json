@@ -7,20 +7,15 @@
     "type": "git",
     "url": "https://github.com/algolia/algolia-sitemap.git"
   },
-  "files": [
-    "build/*"
-  ],
+  "files": ["build/*"],
   "scripts": {
     "precommit": "lint-staged",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "build": "babel *.js -d build",
     "test": "jest && eslint ."
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "git add"]
   },
   "dependencies": {
     "algoliasearch": "^3.22.2",
@@ -28,9 +23,7 @@
     "validator": "^9.0.0"
   },
   "jest": {
-    "snapshotSerializers": [
-      "jest-serializer-html"
-    ]
+    "snapshotSerializers": ["jest-serializer-html"]
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
