@@ -75,10 +75,8 @@ see https://www.sitemaps.org/protocol.html
 see https://www.w3.org/TR/NOTE-datetime"
 `;
 
-exports[`sitemap Validation ensures lastmod is a w3c date 3`] = `"This library (validator.js) validates strings only"`;
-
-exports[`sitemap Validation ensures lastmod is a w3c date 4`] = `
-"lastmod \\"Thu Jan 01 1970 01:00:00 GMT+0100 (CET)\\" is not valid. It should be a valid ISO 8601 date
+exports[`sitemap Validation ensures lastmod is a w3c date 3`] = `
+"lastmod \\"Thu Jan 01 1970 00:00:00 GMT+0000 (UTC)\\" is not valid. It should be a valid ISO 8601 date
 
 Try using new Date().toISOString()
 
@@ -86,7 +84,7 @@ see https://www.sitemaps.org/protocol.html
 see https://www.w3.org/TR/NOTE-datetime"
 `;
 
-exports[`sitemap Validation ensures lastmod is a w3c date 5`] = `
+exports[`sitemap Validation ensures lastmod is a w3c date 4`] = `
 "lastmod \\"Thu Jan 01 1970\\" is not valid. It should be a valid ISO 8601 date
 
 Try using new Date().toISOString()
