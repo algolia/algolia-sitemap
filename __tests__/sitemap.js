@@ -68,7 +68,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -82,7 +82,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -107,7 +107,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -128,7 +128,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -154,7 +154,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
   });
