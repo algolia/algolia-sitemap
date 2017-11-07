@@ -68,7 +68,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -76,13 +76,18 @@ describe('sitemap', () => {
       [
         { loc: 'https://example.com', lastmod: '' },
         { loc: 'https://example.com', lastmod: '15 august' },
-        { loc: 'https://example.com', lastmod: new Date(1) },
-        { loc: 'https://example.com', lastmod: new Date(1).toString() },
-        { loc: 'https://example.com', lastmod: new Date(1).toDateString() },
+        {
+          loc: 'https://example.com',
+          lastmod: 'Thu Jan 01 1970 00:00:00 GMT+0000 (UTC)',
+        },
+        {
+          loc: 'https://example.com',
+          lastmod: 'Thu Jan 01 1970',
+        },
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -107,7 +112,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -128,7 +133,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -154,7 +159,7 @@ describe('sitemap', () => {
       ].forEach(entry => {
         expect(() => {
           createSitemap([entry]);
-        }).toThrow();
+        }).toThrowErrorMatchingSnapshot();
       });
     });
   });

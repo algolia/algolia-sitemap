@@ -1,5 +1,144 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`sitemap Validation ensures alternates are returning urls 1`] = `
+"alternates {} was not valid. An object with
+
+{
+  languages: ['nl-BE', 'fr', 'pt-BR'],
+  hitToURL: (language) => \`the url for that \${language}\`,
+}
+
+was expected."
+`;
+
+exports[`sitemap Validation ensures alternates are returning urls 2`] = `
+"alternates {\\"languages\\":\\"\\"} was not valid. An object with
+
+{
+  languages: ['nl-BE', 'fr', 'pt-BR'],
+  hitToURL: (language) => \`the url for that \${language}\`,
+}
+
+was expected."
+`;
+
+exports[`sitemap Validation ensures alternates are returning urls 3`] = `
+"alternates {\\"languages\\":[\\"\\"]} was not valid. An object with
+
+{
+  languages: ['nl-BE', 'fr', 'pt-BR'],
+  hitToURL: (language) => \`the url for that \${language}\`,
+}
+
+was expected."
+`;
+
+exports[`sitemap Validation ensures changefreq follows spec 1`] = `
+"changefreq \\"WEEKLY\\" was not a valid value.
+
+expected: always, hourly, daily, weekly, monthly, yearly, never
+
+see https://www.sitemaps.org/protocol.html for more information"
+`;
+
+exports[`sitemap Validation ensures changefreq follows spec 2`] = `
+"changefreq \\"0\\" was not a valid value.
+
+expected: always, hourly, daily, weekly, monthly, yearly, never
+
+see https://www.sitemaps.org/protocol.html for more information"
+`;
+
+exports[`sitemap Validation ensures changefreq follows spec 3`] = `
+"changefreq \\"null\\" was not a valid value.
+
+expected: always, hourly, daily, weekly, monthly, yearly, never
+
+see https://www.sitemaps.org/protocol.html for more information"
+`;
+
+exports[`sitemap Validation ensures lastmod is a w3c date 1`] = `
+"lastmod \\"\\" is not valid. It should be a valid ISO 8601 date
+
+Try using new Date().toISOString()
+
+see https://www.sitemaps.org/protocol.html
+see https://www.w3.org/TR/NOTE-datetime"
+`;
+
+exports[`sitemap Validation ensures lastmod is a w3c date 2`] = `
+"lastmod \\"15 august\\" is not valid. It should be a valid ISO 8601 date
+
+Try using new Date().toISOString()
+
+see https://www.sitemaps.org/protocol.html
+see https://www.w3.org/TR/NOTE-datetime"
+`;
+
+exports[`sitemap Validation ensures lastmod is a w3c date 3`] = `
+"lastmod \\"Thu Jan 01 1970 00:00:00 GMT+0000 (UTC)\\" is not valid. It should be a valid ISO 8601 date
+
+Try using new Date().toISOString()
+
+see https://www.sitemaps.org/protocol.html
+see https://www.w3.org/TR/NOTE-datetime"
+`;
+
+exports[`sitemap Validation ensures lastmod is a w3c date 4`] = `
+"lastmod \\"Thu Jan 01 1970\\" is not valid. It should be a valid ISO 8601 date
+
+Try using new Date().toISOString()
+
+see https://www.sitemaps.org/protocol.html
+see https://www.w3.org/TR/NOTE-datetime"
+`;
+
+exports[`sitemap Validation ensures loc is required 1`] = `
+"loc \\"undefined\\" was not valid. It's required.
+
+see https://www.sitemaps.org/protocol.html"
+`;
+
+exports[`sitemap Validation ensures loc is required 2`] = `
+"loc \\"undefined\\" was not valid. It's required.
+
+see https://www.sitemaps.org/protocol.html"
+`;
+
+exports[`sitemap Validation ensures loc is required 3`] = `
+"loc \\"undefined\\" was not valid. It's required.
+
+see https://www.sitemaps.org/protocol.html"
+`;
+
+exports[`sitemap Validation ensures priority is between 0 and 1 1`] = `
+"
+priority \\"NaN\\" was not valid. A number between 0 and 1 is expected.
+
+see https://www.sitemaps.org/protocol.html for more information"
+`;
+
+exports[`sitemap Validation ensures priority is between 0 and 1 2`] = `
+"
+priority \\"0\\" was not valid. A number between 0 and 1 is expected.
+
+see https://www.sitemaps.org/protocol.html for more information"
+`;
+
+exports[`sitemap Validation ensures priority is between 0 and 1 3`] = `
+"
+priority \\"-5\\" was not valid. A number between 0 and 1 is expected.
+
+see https://www.sitemaps.org/protocol.html for more information"
+`;
+
+exports[`sitemap Validation ensures priority is between 0 and 1 4`] = `
+"
+priority \\"1.1\\" was not valid. A number between 0 and 1 is expected.
+
+see https://www.sitemaps.org/protocol.html for more information"
+`;
+
 exports[`sitemap renders empty if needed 1`] = `
 
 <?xml version="1.0"

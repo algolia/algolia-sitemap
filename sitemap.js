@@ -27,7 +27,7 @@ function createSitemapindex(sitemaps = []) {
 const isValidURL = ({ loc, lastmod, changefreq, priority, alternates }) => {
   // loc
   // eslint-disable-next-line camelcase
-  if (!loc && !isURL(loc, { require_valid_protocol: true })) {
+  if (!loc && !isURL(`${loc}`, { require_valid_protocol: true })) {
     throw new Error(
       `loc "${loc}" was not valid. It's required.
 
@@ -75,7 +75,8 @@ see https://www.sitemaps.org/protocol.html for more information`
     (!Number.isFinite(priority) && priority !== undefined)
   ) {
     throw new Error(
-      `priority "${priority}" was not valid. A number between 0 and 1 is expected.
+      `
+priority "${priority}" was not valid. A number between 0 and 1 is expected.
 
 see https://www.sitemaps.org/protocol.html for more information`
     );
