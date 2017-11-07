@@ -27,7 +27,7 @@ function createSitemapindex(sitemaps = []) {
 const isValidURL = ({ loc, lastmod, changefreq, priority, alternates }) => {
   // loc
   // eslint-disable-next-line camelcase
-  if (!loc && !isURL(loc, { require_valid_protocol: true })) {
+  if (!loc && !isURL(`${loc}`, { require_valid_protocol: true })) {
     throw new Error(
       `loc "${loc}" was not valid. It's required.
 
