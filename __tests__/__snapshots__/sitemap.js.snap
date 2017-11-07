@@ -93,11 +93,23 @@ see https://www.sitemaps.org/protocol.html
 see https://www.w3.org/TR/NOTE-datetime"
 `;
 
-exports[`sitemap Validation ensures loc is required 1`] = `"This library (validator.js) validates strings only"`;
+exports[`sitemap Validation ensures loc is required 1`] = `
+"loc \\"undefined\\" was not valid. It's required.
 
-exports[`sitemap Validation ensures loc is required 2`] = `"This library (validator.js) validates strings only"`;
+see https://www.sitemaps.org/protocol.html"
+`;
 
-exports[`sitemap Validation ensures loc is required 3`] = `"This library (validator.js) validates strings only"`;
+exports[`sitemap Validation ensures loc is required 2`] = `
+"loc \\"undefined\\" was not valid. It's required.
+
+see https://www.sitemaps.org/protocol.html"
+`;
+
+exports[`sitemap Validation ensures loc is required 3`] = `
+"loc \\"undefined\\" was not valid. It's required.
+
+see https://www.sitemaps.org/protocol.html"
+`;
 
 exports[`sitemap Validation ensures priority is between 0 and 1 1`] = `
 "
