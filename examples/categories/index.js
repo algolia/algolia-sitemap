@@ -23,7 +23,7 @@ const alreadyAdded = {};
 
 /**
  * Function to transform a hit into its link
- * 
+ *
  * @param {Object} hit a hit to transform
  * @returns {Params|Array.<Params>} the parameters for this hit
  */

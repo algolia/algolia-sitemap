@@ -75,7 +75,8 @@ see https://www.sitemaps.org/protocol.html for more information`
     (!Number.isFinite(priority) && priority !== undefined)
   ) {
     throw new Error(
-      `priority "${priority}" was not valid. A number between 0 and 1 is expected.
+      `
+priority "${priority}" was not valid. A number between 0 and 1 is expected.
 
 see https://www.sitemaps.org/protocol.html for more information`
     );
