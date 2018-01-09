@@ -30,7 +30,7 @@ const algoliaSitemap = require('algolia-sitemap');
 
 algoliaSitemap({
   algoliaConfig,
-  sitemapLoc: 'https://yoursite.com/sitemaps'
+  sitemapLoc: 'https://yoursite.com/sitemaps',
   outputFolder: 'sitemaps',
   hitToParams,
 });
@@ -43,7 +43,7 @@ Where `algoliaConfig` holds the setup for your index. Make sure that the API key
 const algoliaConfig = {
   appId: 'XXXXX',
   apiKey: 'xxxxxx', // make sure the key has "browse" capability
-  indexName: 'xxxxxx'
+  indexName: 'xxxxxx',
 };
 ```
 
@@ -62,8 +62,8 @@ function hitToParams({ objectID, modified, downloadsRatio }) {
     priority,
     alternates: {
       languages: ['fr', 'pt-BR', 'zh-Hans'],
-      hitToURL: lang => url({ lang, objectID })
-    }
+      hitToURL: lang => url({ lang, objectID }),
+    },
   };
 }
 ```
@@ -89,11 +89,11 @@ You can pass a `params` parameter to `algoliaSitemap`. This allows you to narrow
 ```js
 algoliaSitemap({
   algoliaConfig,
-  sitemapLoc: 'https://yoursite.com/sitemaps'
+  sitemapLoc: 'https://yoursite.com/sitemaps',
   outputFolder: 'sitemaps',
   params: {
-    filters: 'category: phone'
-  }
+    filters: 'category: phone',
+  },
   hitToParams,
 });
 ```
