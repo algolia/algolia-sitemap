@@ -12,7 +12,8 @@
     "precommit": "lint-staged",
     "prepare": "npm run build",
     "build": "babel *.js -d build",
-    "test": "jest && eslint ."
+    "test": "jest && eslint .",
+    "format": "prettier --write {*,**/*,examples/**/*}.{js,md}"
   },
   "lint-staged": {
     "*.js": ["eslint --fix", "git add"]
@@ -42,6 +43,6 @@
     "jest": "22.0.4",
     "jest-serializer-html": "5.0.0",
     "lint-staged": "6.0.0",
-    "prettier": "1.9.0"
+    "prettier": "1.9.2"
   }
 }
