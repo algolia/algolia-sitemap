@@ -1,8 +1,8 @@
 # Algolia sitemap generator
 
-This is a node library allowing you to generate sitemaps from an Algolia index. 
+This is a node library allowing you to generate sitemaps from an Algolia index.
 
->Requires node v6+ (make an issue if this is a problem for you).
+> Requires node v6+ (make an issue if this is a problem for you).
 
 It will create sitemaps, and a sitemap index in a folder of your choosing (for example `/sitemaps`). Then you can upload `/sitemaps/sitemap-index.xml` to Google for good indexing of your pages!
 
@@ -17,7 +17,7 @@ This process is a script that should be ran periodically to keep the sitemaps up
 
 ## How to use
 
-First install the module from `npm` (or with `yarn`): 
+First install the module from `npm` (or with `yarn`):
 
 ```sh
 $ npm install algolia-sitemap --save[-dev]
@@ -42,17 +42,17 @@ Where `algoliaConfig` holds the setup for your index. Make sure that the API key
 // set up your API keys
 const algoliaConfig = {
   appId: 'XXXXX',
-  apiKey: 'xxxxxx',  // make sure the key has "browse" capability
-  indexName: 'xxxxxx',
+  apiKey: 'xxxxxx', // make sure the key has "browse" capability
+  indexName: 'xxxxxx'
 };
 ```
 
 And hitToParams is a function that transforms a hit into a parameters object. This function can return an object of type `Param`, an array of `Param`s or false.
 
 ```js
-function hitToParams({ objectID, modified, downloadsRatio })  {
+function hitToParams({ objectID, modified, downloadsRatio }) {
   const url = ({ lang, objectID }) =>
-  `https://${lang}.yoursite.com/${lang}/detail/${objectID}`;
+    `https://${lang}.yoursite.com/${lang}/detail/${objectID}`;
   const loc = url({ lang: 'en', objectID });
   const lastmod = new Date().toISOString();
   const priority = Math.random();
@@ -62,13 +62,13 @@ function hitToParams({ objectID, modified, downloadsRatio })  {
     priority,
     alternates: {
       languages: ['fr', 'pt-BR', 'zh-Hans'],
-      hitToURL: lang => url({ lang, objectID }),
-    },
+      hitToURL: lang => url({ lang, objectID })
+    }
   };
-};
+}
 ```
 
-These parameters mean: 
+These parameters mean:
 
 ```js
 /**
@@ -83,8 +83,8 @@ These parameters mean:
 ```
 
 ## Custom queries
-You can pass a `params` parameter to `algoliaSitemap`. This allows you to narrow down the returned results.
-For instance, in order to have `hitToParams` called for every products in the `phone` category, we could do:
+
+You can pass a `params` parameter to `algoliaSitemap`. This allows you to narrow down the returned results. For instance, in order to have `hitToParams` called for every products in the `phone` category, we could do:
 
 ```js
 algoliaSitemap({
@@ -101,11 +101,12 @@ algoliaSitemap({
 Note that a query can also be passed to `params`.
 
 ## Examples
+
 You can also take a look at `examples` folder for how it works.
 
 * To generate a sitemap of all the hits in an index, check the [detail pages example](examples/details)
 * To generate a sitemap of all the category pages, check the [category pages example](examples/category)
 
-# License 
+# License
 
 MIT

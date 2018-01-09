@@ -12,7 +12,8 @@
     "precommit": "lint-staged",
     "prepare": "npm run build",
     "build": "babel *.js -d build",
-    "test": "jest && eslint ."
+    "test": "jest && eslint .",
+    "format": "prettier --write {*,**/*,examples/**/*}.{js,md}"
   },
   "lint-staged": {
     "*.js": ["eslint --fix", "git add"]

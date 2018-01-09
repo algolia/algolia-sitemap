@@ -18,7 +18,7 @@ Fixed build steps of 2.0.0
 
 ## 2.0.0
 
-* now returns a Promise, you can use this to 
+* now returns a Promise, you can use this to
 * handles invalid values for the params
 * allows you to pass Algolia options
 * internal changes in how the changelog is made
