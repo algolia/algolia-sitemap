@@ -19,7 +19,7 @@
     "*.js": ["eslint --fix", "git add"]
   },
   "dependencies": {
-    "algoliasearch": "^3.22.2",
+    "algoliasearch": "^3.0.0",
     "jsx-string": "^2.0.0",
     "validator": "^9.0.0"
   },
