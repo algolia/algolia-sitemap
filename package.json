@@ -33,7 +33,7 @@
     "babel-plugin-transform-react-jsx": "6.24.1",
     "babel-preset-env": "1.6.1",
     "eslint": "4.17.0",
-    "eslint-config-algolia": "13.0.1",
+    "eslint-config-algolia": "13.1.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jest": "21.8.0",
