@@ -22,6 +22,37 @@ describe('sitemap', () => {
     expect(sitemap.stringify()).toMatchSnapshot();
   });
 
+  it('renders with images', () => {
+    const entries = [
+      {
+        loc: 'https://www.example.com',
+        images: [
+          { loc: 'https://www.example.com/hero.jpg', title: 'hero test' },
+          {
+            loc: 'https://www.example.com/caption.png',
+            caption: 'caption test',
+          },
+        ],
+      },
+      {
+        loc: 'https://www.example.com/test',
+        images: [
+          { loc: 'https://www.example.com/test.jpg', title: 'test' },
+          {
+            loc: 'https://www.example.com/empire.jpg',
+            title: 'Empire State Building',
+            // eslint-disable-next-line
+            geo_location: 'New York, New York',
+            license:
+              'https://raw.githubusercontent.com/algolia/algolia-sitemap/master/LICENSE',
+          },
+        ],
+      },
+    ];
+    const sitemap = createSitemap(entries);
+    expect(sitemap.stringify()).toMatchSnapshot();
+  });
+
   it('renders with multiple optional entries', () => {
     const entries = [
       {
