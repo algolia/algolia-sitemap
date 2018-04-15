@@ -78,7 +78,7 @@ These parameters mean:
  * @property {number} [priority] the priority you give to this link (between 0 and 1)
  * @property {Object} [alternates] alternative versions of this link (useful for multi-language)
  * @property {Array} [alternates.languages] list of languages that are enabled
- * @property {Array} [images] list of images links related to the hit.
+ * @property {Array} [images] list of images links related to the hit
  * @property {function} [alternates.hitToURL] function to transform a language into a url of this object
  */
 ```
