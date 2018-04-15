@@ -24,7 +24,14 @@ function createSitemapindex(sitemaps = []) {
   };
 }
 
-const isValidURL = ({ loc, lastmod, changefreq, priority, alternates }) => {
+const isValidURL = ({
+  loc,
+  lastmod,
+  changefreq,
+  priority,
+  alternates,
+  images,
+}) => {
   // loc
   // eslint-disable-next-line camelcase
   if (!loc && !isURL(`${loc}`, { require_valid_protocol: true })) {
@@ -82,6 +89,35 @@ see https://www.sitemaps.org/protocol.html for more information`
     );
   }
 
+  // images
+  const _imagesError = `images ${JSON.stringify(
+    images
+  )} was not valid. An array with image locations like
+
+[{
+  loc: 'https://example.com/test/my-image.jpg'
+},{
+  loc: 'https://example.com/test/another-image.png'
+}]
+
+was expected.
+
+see https://support.google.com/webmasters/answer/178636?hl=en for more information.`;
+
+  if (images !== undefined) {
+    if (!(images instanceof Array)) {
+      throw new Error(_imagesError);
+    }
+    images.forEach(img => {
+      if (typeof img.loc !== 'string') {
+        throw new Error(_imagesError);
+      }
+      if (!isURL(img.loc)) {
+        throw new Error(_imagesError);
+      }
+    });
+  }
+
   // alternates
   const _alternatesError = `alternates ${JSON.stringify(
     alternates
@@ -114,6 +150,7 @@ was expected.`;
     changefreq,
     priority: priority === undefined ? undefined : priority.toFixed(1),
     alternates,
+    images,
   };
 };
 
@@ -125,6 +162,17 @@ function createSitemap(entries = []) {
         <xhtml_link rel="alternate" hreflang={language} href={href} />
       ));
 
+  const _images = img => (
+    <imageimage>
+      <imageloc>{img.loc}</imageloc>
+      {img.title && <imagetitle>{img.title}</imagetitle>}
+      {img.caption && <imagecaption>{img.caption}</imagecaption>}
+      {img.geo_location && (
+        <imagegeolocation>{img.geo_location}</imagegeolocation>
+      )}
+      {img.license && <imagelicense>{img.license}</imagelicense>}
+    </imageimage>
+  );
   const url = args => {
     const {
       loc = undefined,
@@ -132,7 +180,9 @@ function createSitemap(entries = []) {
       changefreq = undefined,
       priority = undefined,
       alternates = undefined,
+      images = undefined,
     } = isValidURL(args);
+
     return (
       <url
         xmlns_xhtml={alternates ? 'http://www.w3.org/1999/xhtml' : undefined}
@@ -142,18 +192,47 @@ function createSitemap(entries = []) {
         {changefreq && <changefreq>{changefreq}</changefreq>}
         {priority && <priority>{priority}</priority>}
         {alternates && _alternates(alternates)}
+        {images && images.length > 0 ? images.map(_images) : null}
       </url>
     );
   };
 
+  // Add xml namespsace to <urlset>
+  // For info on xmlns:images see https://support.google.com/webmasters/answer/178636?hl=en
   const sitemap = (
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns_image="http://www.google.com/schemas/sitemap-image/1.1"
+    >
       {entries.map(url)}
     </urlset>
   );
 
   return {
-    stringify: () => xmlStringify(sitemap),
+    stringify: () =>
+      xmlStringify(sitemap)
+        // Despite the fact that jsx-string is supposed to convert '_' in tag/attribute names to ':',
+        // it can only do this for self-closing tags (i.e. without children), thus we augment some XML output
+        // with regex/string magic.
+        //
+        // <image:image></image:image>
+        .replace(/<imageimage>/g, '<image:image>')
+        .replace(/<\/imageimage>/g, '</image:image>')
+        // <image:loc></image:loc>
+        .replace(/<imageloc>/g, '<image:loc>')
+        .replace(/<\/imageloc>/g, '</image:loc>')
+        // <image:caption></image:caption>
+        .replace(/<imagecaption>/g, '<image:caption>')
+        .replace(/<\/imagecaption>/g, '</image:caption>')
+        // <image:title></image:title>
+        .replace(/<imagetitle>/g, '<image:title>')
+        .replace(/<\/imagetitle>/g, '</image:title>')
+        // <image:geo_location></image:geo_location>
+        .replace(/<imagegeolocation>/g, '<image:geo_location>')
+        .replace(/<\/imagegeolocation>/g, '</image:geo_location>')
+        // <image:license></image:license>
+        .replace(/<imagelicense>/g, '<image:license>')
+        .replace(/<\/imagelicense>/g, '</image:license>'),
   };
 }
 
