@@ -78,9 +78,65 @@ These parameters mean:
  * @property {number} [priority] the priority you give to this link (between 0 and 1)
  * @property {Object} [alternates] alternative versions of this link (useful for multi-language)
  * @property {Array} [alternates.languages] list of languages that are enabled
+ * @property {Array} [images] list of images links related to the hit.
  * @property {function} [alternates.hitToURL] function to transform a language into a url of this object
  */
 ```
+
+### Image Sitemaps
+
+If you want your sitemap to include [Google image extensions](https://support.google.com/webmasters/answer/178636?hl=en), return an array for each hit containing objects with the following keys:
+
+```js
+/**
+ * @typedef {Object} Image
+ * @property {string} loc the link of this image
+ * @property {string} [title] image title
+ * @property {string} [caption] image caption
+ * @property {string} [geo_location] geographic location (e.g. 'Limerick, Ireland')
+ * @property {string} [license] the link to the image's license
+ */
+```
+
+For example:
+
+```js
+function hitToParams({
+  objectID,
+  modified,
+  downloadsRatio,
+  profilePic,
+  coverPhoto,
+  name,
+}) {
+  const url = ({ lang, objectID }) =>
+    `https://${lang}.yoursite.com/${lang}/detail/${objectID}`;
+  const loc = url({ lang: 'en', objectID });
+  const lastmod = new Date().toISOString();
+  const priority = Math.random();
+  return {
+    loc,
+    lastmod,
+    priority,
+    images: [
+      {
+        loc: `https://media.yoursite.com/images/${profilePic}`,
+        title: name,
+      },
+      {
+        loc: `https://media.yoursite.com/images/${coverPhoto}`,
+        title: name,
+      },
+    ],
+    alternates: {
+      languages: ['fr', 'pt-BR', 'zh-Hans'],
+      hitToURL: lang => url({ lang, objectID }),
+    },
+  };
+}
+```
+
+For more information, see https://support.google.com/webmasters/answer/178636?hl=en
 
 ## Custom queries
 
