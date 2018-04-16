@@ -7,7 +7,9 @@
     "type": "git",
     "url": "https://github.com/algolia/algolia-sitemap.git"
   },
-  "files": ["build/*"],
+  "files": [
+    "build/*"
+  ],
   "scripts": {
     "precommit": "lint-staged",
     "prepare": "npm run build",
@@ -16,33 +18,38 @@
     "format": "prettier --write {*,**/*,examples/**/*}.{js,md}"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "dependencies": {
-    "algoliasearch": "^3.22.2",
+    "algoliasearch": "^3.26.0",
     "jsx-string": "^2.0.0",
-    "validator": "^9.0.0"
+    "validator": "^9.4.1"
   },
   "jest": {
-    "snapshotSerializers": ["jest-serializer-html"]
+    "snapshotSerializers": [
+      "jest-serializer-html"
+    ]
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.1",
-    "babel-jest": "22.2.2",
+    "babel-jest": "22.4.3",
     "babel-plugin-transform-react-jsx": "6.24.1",
     "babel-preset-env": "1.6.1",
-    "eslint": "4.17.0",
+    "eslint": "4.19.1",
     "eslint-config-algolia": "13.1.0",
     "eslint-config-prettier": "2.9.0",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jest": "21.12.1",
+    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-jest": "21.15.0",
     "eslint-plugin-prettier": "2.6.0",
-    "eslint-plugin-react": "7.6.1",
+    "eslint-plugin-react": "7.7.0",
     "husky": "0.14.3",
-    "jest": "22.3.0",
+    "jest": "22.4.3",
     "jest-serializer-html": "5.0.0",
-    "lint-staged": "6.1.0",
-    "prettier": "1.10.2"
+    "lint-staged": "7.0.4",
+    "prettier": "1.12.0"
   }
 }
