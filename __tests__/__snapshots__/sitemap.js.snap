@@ -144,7 +144,9 @@ exports[`sitemap renders empty if needed 1`] = `
 <?xml version="1.0"
       encoding="utf-8"
 ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
 </urlset>
 
 `;
@@ -154,7 +156,9 @@ exports[`sitemap renders with a single loc-only entry 1`] = `
 <?xml version="1.0"
       encoding="utf-8"
 ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url>
     <loc>
       https://www.example.com
@@ -169,7 +173,9 @@ exports[`sitemap renders with alternatives 1`] = `
 <?xml version="1.0"
       encoding="utf-8"
 ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <loc>
       https://www.example.com
@@ -189,12 +195,74 @@ exports[`sitemap renders with alternatives 1`] = `
 
 `;
 
+exports[`sitemap renders with images 1`] = `
+
+<?xml version="1.0"
+      encoding="utf-8"
+?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
+  <url>
+    <loc>
+      https://www.example.com
+    </loc>
+    <image:image>
+      <image:loc>
+        https://www.example.com/hero.jpg
+      </image:loc>
+      <image:title>
+        hero test
+      </image:title>
+    </image:image>
+    <image:image>
+      <image:loc>
+        https://www.example.com/caption.png
+      </image:loc>
+      <image:caption>
+        caption test
+      </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>
+      https://www.example.com/test
+    </loc>
+    <image:image>
+      <image:loc>
+        https://www.example.com/test.jpg
+      </image:loc>
+      <image:title>
+        test
+      </image:title>
+    </image:image>
+    <image:image>
+      <image:loc>
+        https://www.example.com/empire.jpg
+      </image:loc>
+      <image:title>
+        Empire State Building
+      </image:title>
+      <image:geo_location>
+        New York, New York
+      </image:geo_location>
+      <image:license>
+        https://raw.githubusercontent.com/algolia/algolia-sitemap/master/LICENSE
+      </image:license>
+    </image:image>
+  </url>
+</urlset>
+
+`;
+
 exports[`sitemap renders with multiple loc-only entries 1`] = `
 
 <?xml version="1.0"
       encoding="utf-8"
 ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url>
     <loc>
       https://www.example.com
@@ -214,7 +282,9 @@ exports[`sitemap renders with multiple optional entries 1`] = `
 <?xml version="1.0"
       encoding="utf-8"
 ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url>
     <loc>
       https://www.example.com
