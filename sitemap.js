@@ -215,24 +215,10 @@ function createSitemap(entries = []) {
         // it can only do this for self-closing tags (i.e. without children), thus we augment some XML output
         // with regex/string magic.
         //
-        // <image:image></image:image>
-        .replace(/<imageimage>/g, '<image:image>')
-        .replace(/<\/imageimage>/g, '</image:image>')
-        // <image:loc></image:loc>
-        .replace(/<imageloc>/g, '<image:loc>')
-        .replace(/<\/imageloc>/g, '</image:loc>')
-        // <image:caption></image:caption>
-        .replace(/<imagecaption>/g, '<image:caption>')
-        .replace(/<\/imagecaption>/g, '</image:caption>')
-        // <image:title></image:title>
-        .replace(/<imagetitle>/g, '<image:title>')
-        .replace(/<\/imagetitle>/g, '</image:title>')
-        // <image:geo_location></image:geo_location>
-        .replace(/<imagegeolocation>/g, '<image:geo_location>')
-        .replace(/<\/imagegeolocation>/g, '</image:geo_location>')
-        // <image:license></image:license>
-        .replace(/<imagelicense>/g, '<image:license>')
-        .replace(/<\/imagelicense>/g, '</image:license>'),
+        // <imagegeolocation></imagegeolocation> ➡️ <image:geo_location></image:geo_location>
+        .replace(/(<\/?image)(geolocation)/g, '$1geo_location')
+        // <imageimage></imageimage> ➡️ <image:image></image:image>
+        .replace(/<\/?image/g, '$&:'),
   };
 }
 
