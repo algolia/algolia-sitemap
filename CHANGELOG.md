@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.1.0
+
+* support for `images` (thanks [@jaredpalmer](https://github.com/jaredpalmer)) ([#108](https://github.com/algolia/algolia-sitemap/pull/108))
+* updated dependencies ([f388b2e](https://github.com/algolia/algolia-sitemap/commit/f388b2e))
+
 ## 2.0.7
 
 Some chores and updating of dependencies, nothing usage-touching
