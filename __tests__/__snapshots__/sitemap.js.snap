@@ -212,7 +212,7 @@ exports[`sitemap renders with images 1`] = `
         https://www.example.com/hero.jpg
       </image:loc>
       <image:title>
-        hero test
+        <!--[CDATA[hero test]]-->
       </image:title>
     </image:image>
     <image:image>
@@ -220,7 +220,7 @@ exports[`sitemap renders with images 1`] = `
         https://www.example.com/caption.png
       </image:loc>
       <image:caption>
-        caption test
+        <!--[CDATA[caption test]]-->
       </image:caption>
     </image:image>
   </url>
@@ -233,7 +233,7 @@ exports[`sitemap renders with images 1`] = `
         https://www.example.com/test.jpg
       </image:loc>
       <image:title>
-        test
+        <!--[CDATA[test]]-->
       </image:title>
     </image:image>
     <image:image>
@@ -241,7 +241,7 @@ exports[`sitemap renders with images 1`] = `
         https://www.example.com/empire.jpg
       </image:loc>
       <image:title>
-        Empire State Building
+        <!--[CDATA[Empire State Building]]-->
       </image:title>
       <image:geo_location>
         New York, New York
