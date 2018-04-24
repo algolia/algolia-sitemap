@@ -165,7 +165,7 @@ function createSitemap(entries = []) {
   const _images = img => (
     <imageimage>
       <imageloc>{img.loc}</imageloc>
-      {img.title && <imagetitle>{img.title}</imagetitle>}
+      {img.title && <imagetitle>{'a{img.title}</imagetitle>}
       {img.caption && <imagecaption>{img.caption}</imagecaption>}
       {img.geo_location && (
         <imagegeolocation>{img.geo_location}</imagegeolocation>
@@ -217,6 +217,11 @@ function createSitemap(entries = []) {
         //
         // <imagegeolocation></imagegeolocation> ➡️ <image:geo_location></image:geo_location>
         .replace(/(<\/?image)(geolocation)/g, '$1geo_location')
+        // Wrap title and caption in CDATA blocks just in case escaped HTML is passed in.
+        .replace(/<imagetitle>/g, '<imagetitle><![CDATA[')
+        .replace(/<\/imagetitle>/g, ']]></imagetitle>')
+        .replace(/<imagecaption>/g, '<imagecaption><![CDATA[')
+        .replace(/<\/imagecaption>/g, ']]></imagecaption>')
         // <imageimage></imageimage> ➡️ <image:image></image:image>
         .replace(/<\/?image/g, '$&:'),
   };
