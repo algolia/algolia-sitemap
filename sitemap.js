@@ -165,7 +165,7 @@ function createSitemap(entries = []) {
   const _images = img => (
     <imageimage>
       <imageloc>{img.loc}</imageloc>
-      {img.title && <imagetitle>{'a{img.title}</imagetitle>}
+      {img.title && <imagetitle>{img.title}</imagetitle>}
       {img.caption && <imagecaption>{img.caption}</imagecaption>}
       {img.geo_location && (
         <imagegeolocation>{img.geo_location}</imagegeolocation>
