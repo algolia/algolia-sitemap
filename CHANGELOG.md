@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.1.1
+
+* allow for html (escaped) in `<image:title>` and `<image:caption>` (thanks [@jaredpalmer](https://github.com/jaredpalmer)) ([#111](https://github.com/algolia/algolia-sitemap/pull/111))
+
 ## 2.1.0
 
 * support for `images` (thanks [@jaredpalmer](https://github.com/jaredpalmer)) ([#108](https://github.com/algolia/algolia-sitemap/pull/108))
