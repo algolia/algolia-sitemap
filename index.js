@@ -4,8 +4,6 @@ const { saveSiteMap } = require('./saveFiles');
 
 const CHUNK_SIZE = 50000;
 
-let batch = [];
-
 function init({
   algoliaConfig,
   params,
@@ -13,6 +11,7 @@ function init({
   outputFolder,
   hitToParams,
 }) {
+  let batch = [];
   const client = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
   const index = client.initIndex(algoliaConfig.indexName);
   const sitemaps = [];
