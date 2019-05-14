@@ -3417,9 +3417,9 @@ jsx-ast-utils@^2.0.1:
   dependencies:
     array-includes "^3.0.3"
 
-jsx-string@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/jsx-string/-/jsx-string-2.0.0.tgz#db09239d0a8159a23484e79199ce42f19a559e23"
+jsx-string@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jsx-string/-/jsx-string-3.0.0.tgz#e8d09cda7e381388b28ba3991afa32ae06d70cc6"
   dependencies:
     escape-html "^1.0.3"
 

@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "algoliasearch": "^3.26.0",
-    "jsx-string": "^2.0.0",
+    "jsx-string": "^3.0.0",
     "validator": "^10.0.0"
   },
   "jest": {
