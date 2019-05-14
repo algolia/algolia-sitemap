@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.2.0
+
+* fix: place the batch array into the function scope instead of the global scope (thanks [@taravancil](https://github.com/taravancil)) ([#143](https://github.com/algolia/algolia-sitemap/pull/143))
+
 ## 2.1.1
 
 * allow for html (escaped) in `<image:title>` and `<image:caption>` (thanks [@jaredpalmer](https://github.com/jaredpalmer)) ([#111](https://github.com/algolia/algolia-sitemap/pull/111))
