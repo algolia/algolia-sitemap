@@ -42,31 +42,43 @@ function init({
     batch = chunk;
   };
 
-  const aggregator = async args => {
-    let { hits, cursor } = args;
-    do {
-      if (!hits) {
-        return;
-      }
-      batch = batch.concat(
-        hits.reduce((entries, hit) => {
+  const aggregator = (() => {
+    var _ref3 = _asyncToGenerator2(function* (args) {
+      let hits = args.hits,
+          cursor = args.cursor;
+
+      let run = true;
+      do {
+        run = !!cursor;
+        if (!hits) {
+          return;
+        }
+        batch = batch.concat(hits.reduce(function (entries, hit) {
           const entry = hitToParams(hit);
           return entry ? entries.concat(entry) : entries;
-        }, [])
-      );
-      if (batch.length > CHUNK_SIZE) {
-        await flush();
-      }
-      ({ hits, cursor } = await index.browseFrom(cursor));
-    } while (cursor);
-    await handleSitemap(batch);
-    const sitemapIndex = createSitemapindex(sitemaps);
-    await saveSiteMap({
-      sitemap: sitemapIndex,
-      root: outputFolder,
-      filename: 'sitemap-index',
+        }, []));
+        if (batch.length > CHUNK_SIZE) {
+          yield flush();
+        }
+
+        var _ref4 = yield index.browseFrom(cursor);
+
+        hits = _ref4.hits;
+        cursor = _ref4.cursor;
+      } while (run);
+      yield handleSitemap(batch);
+      const sitemapIndex = createSitemapindex(sitemaps);
+      yield saveSiteMap({
+        sitemap: sitemapIndex,
+        root: outputFolder,
+        filename: 'sitemap-index'
+      });
     });
-  };
+
+    return function aggregator(_x2) {
+      return _ref3.apply(this, arguments);
+    };
+  })();
 
   return index.browse(params).then(aggregator);
 }
