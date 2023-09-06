@@ -57,8 +57,11 @@ function init({
       if (batch.length > CHUNK_SIZE) {
         await flush();
       }
-      ({ hits, cursor } = await index.browseFrom(cursor));
+      if (cursor) {
+        ({ hits, cursor } = await index.browseFrom(cursor));
+      }
     } while (cursor);
+
     await handleSitemap(batch);
     const sitemapIndex = createSitemapindex(sitemaps);
     await saveSiteMap({
