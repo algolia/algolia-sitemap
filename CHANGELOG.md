@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.2.1
+
+* fix: only continue browsing if cursor is present ([#215](https://github.com/algolia/algolia-sitemap/issues/215))
+
 ## 2.2.0
 
 * fix: place the batch array into the function scope instead of the global scope (thanks [@taravancil](https://github.com/taravancil)) ([#143](https://github.com/algolia/algolia-sitemap/pull/143))
