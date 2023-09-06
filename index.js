@@ -11,6 +11,25 @@ function init({
   outputFolder,
   hitToParams,
 }) {
+  if (!algoliaConfig) {
+    throw new Error('Missing algoliaConfig');
+  }
+  if (
+    !algoliaConfig.appId ||
+    !algoliaConfig.apiKey ||
+    !algoliaConfig.indexName
+  ) {
+    throw new Error('Missing credentials in algoliaConfig');
+  }
+  if (!sitemapLoc) {
+    throw new Error(
+      'Missing sitemapLoc (e.g. https://www.example.org/sitemaps)'
+    );
+  }
+  if (typeof hitToParams !== 'function') {
+    throw new Error('Missing hitToParams function');
+  }
+
   let batch = [];
   const client = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
   const index = client.initIndex(algoliaConfig.indexName);
@@ -44,7 +63,14 @@ function init({
 
   const aggregator = async args => {
     let { hits, cursor } = args;
-    do {
+    batch = batch.concat(
+      hits.reduce((entries, hit) => {
+        const entry = hitToParams(hit);
+        return entry ? entries.concat(entry) : entries;
+      }, [])
+    );
+    while (cursor) {
+      ({ hits, cursor } = await index.browseFrom(cursor));
       if (!hits) {
         return;
       }
@@ -57,8 +83,7 @@ function init({
       if (batch.length > CHUNK_SIZE) {
         await flush();
       }
-      ({ hits, cursor } = await index.browseFrom(cursor));
-    } while (cursor);
+    }
     await handleSitemap(batch);
     const sitemapIndex = createSitemapindex(sitemaps);
     await saveSiteMap({
