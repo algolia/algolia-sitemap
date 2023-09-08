@@ -43,7 +43,7 @@
     "eslint-config-algolia": "13.1.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.12.0",
-    "eslint-plugin-jest": "21.15.1",
+    "eslint-plugin-jest": "22.21.0",
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-react": "7.8.2",
     "husky": "0.14.3",
