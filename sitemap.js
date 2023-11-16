@@ -31,6 +31,7 @@ const isValidURL = ({
   priority,
   alternates,
   images,
+  videos,
 }) => {
   // loc
   // eslint-disable-next-line camelcase
@@ -118,6 +119,46 @@ see https://support.google.com/webmasters/answer/178636?hl=en for more informati
     });
   }
 
+  // videos
+  const _videosError = `videos ${JSON.stringify(videos)} was not valid. An array with video locations like
+
+[{
+  thumbnail_loc: 'https://example.com/test/my-video.jpg',
+  title: 'Video title',
+  description: 'Video description',
+  content_loc: 'https://example.com/test/my-video.mp4'
+}]
+
+was expected.
+
+see https://support.google.com/webmasters/answer/178636?hl=en for more information.`;
+
+  if (videos !== undefined) {
+    if (!(videos instanceof Array)) {
+      throw new Error(_videosError);
+    }
+    videos.forEach(vid => {
+      if (typeof vid.thumbnail_loc !== 'string') {
+        throw new Error(_videosError);
+      }
+      if (!isURL(vid.thumbnail_loc)) {
+        throw new Error(_videosError);
+      }
+      if (typeof vid.title !== 'string') {
+        throw new Error(_videosError);
+      }
+      if (typeof vid.description !== 'string') {
+        throw new Error(_videosError);
+      }
+      if (typeof vid.content_loc !== 'string' && typeof vid.player_loc !== 'string') {
+        throw new Error(_videosError);
+      }
+      if (!isURL(vid.content_loc) && !isURL(vid.player_loc)) {
+        throw new Error(_videosError);
+      }
+    });
+  }
+
   // alternates
   const _alternatesError = `alternates ${JSON.stringify(
     alternates
@@ -151,6 +192,7 @@ was expected.`;
     priority: priority === undefined ? undefined : priority.toFixed(1),
     alternates,
     images,
+    videos,
   };
 };
 
@@ -173,6 +215,17 @@ function createSitemap(entries = []) {
       {img.license && <imagelicense>{img.license}</imagelicense>}
     </imageimage>
   );
+
+  const _videos = vid => (
+    <videovideo>
+      <videotitle>{vid.title}</videotitle>
+      <videodescription>{vid.description}</videodescription>
+      <videothumbnailLoc>{vid.thumbnail_loc}</videothumbnailLoc>
+      {vid.content_loc && <videocontentLoc>{vid.content_loc}</videocontentLoc>}
+      {vid.player_loc && <videoplayerLoc>{vid.player_loc}</videoplayerLoc>}
+    </videovideo>
+  );
+
   const url = args => {
     const {
       loc = undefined,
@@ -181,6 +234,7 @@ function createSitemap(entries = []) {
       priority = undefined,
       alternates = undefined,
       images = undefined,
+      videos = undefined,
     } = isValidURL(args);
 
     return (
@@ -193,6 +247,7 @@ function createSitemap(entries = []) {
         {priority && <priority>{priority}</priority>}
         {alternates && _alternates(alternates)}
         {images && images.length > 0 ? images.map(_images) : null}
+        {videos && videos.length > 0 ? videos.map(_videos) : null}
       </url>
     );
   };
@@ -203,6 +258,7 @@ function createSitemap(entries = []) {
     <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns_image="http://www.google.com/schemas/sitemap-image/1.1"
+      xmlns_video="http://www.google.com/schemas/sitemap-video/1.1"
     >
       {entries.map(url)}
     </urlset>
@@ -222,8 +278,18 @@ function createSitemap(entries = []) {
         .replace(/<\/imagetitle>/g, ']]></imagetitle>')
         .replace(/<imagecaption>/g, '<imagecaption><![CDATA[')
         .replace(/<\/imagecaption>/g, ']]></imagecaption>')
+        .replace(/<videotitle>/g, '<videotitle><![CDATA[')
+        .replace(/<\/videotitle>/g, ']]></videotitle>')
+        .replace(/<videodescription>/g, '<videodescription><![CDATA[')
+        .replace(/<\/videodescription>/g, ']]></videodescription>')
         // <imageimage></imageimage> ➡️ <image:image></image:image>
-        .replace(/<\/?image/g, '$&:'),
+        .replace(/<\/?image/g, '$&:')
+        // <videovideo></videovideo> ➡️ <video:video></video:video>
+        .replace(/<\/?video/g, '$&:')
+        // Video sitemaps use underscores in attribute names
+        .replace(/<(\/?)video:thumbnailLoc/g, '<$1video:thumbnail_loc')
+        .replace(/<(\/?)video:contentLoc/g, '<$1video:content_loc')
+        .replace(/<(\/?)video:playerLoc/g, '<$1video:player_loc')
   };
 }
 
