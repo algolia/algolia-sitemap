@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.2.2
+
+* fix(deps): update validator to latest ([#222](https://github.com/algolia/algolia-sitemap/issues/222))
+
 ## 2.2.1
 
 * fix: only continue browsing if cursor is present ([#215](https://github.com/algolia/algolia-sitemap/issues/215))
