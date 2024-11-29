@@ -79,6 +79,7 @@ These parameters mean:
  * @property {Object} [alternates] alternative versions of this link (useful for multi-language)
  * @property {Array} [alternates.languages] list of languages that are enabled
  * @property {Array} [images] list of images links related to the hit
+* @property {Array} [videos] list of videos links related to the hit
  * @property {function} [alternates.hitToURL] function to transform a language into a url of this object
  */
 ```
@@ -137,6 +138,60 @@ function hitToParams({
 ```
 
 For more information, see https://support.google.com/webmasters/answer/178636?hl=en
+
+### Video Sitemaps
+
+If you want your sitemap to include [Google video extensions](https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps), return an array for each hit containing objects with the following keys:
+
+```js
+/**
+ * @typedef {Object} Video
+ * @property {string} [title] Video title
+ * @property {string} [description] Video description
+ * @property {string} [thumbnail_loc] location of video thumbnail image
+ * @property {string} [content_loc] location of video file
+ * @property {string} [player_loc] location of video player
+ */
+```
+
+For example:
+
+```js
+function hitToParams({
+  objectID,
+  modified,
+  downloadsRatio,
+  videoFile,
+  videoThumbnail,
+  videoDescription
+  name,
+}) {
+  const url = ({ lang, objectID }) =>
+    `https://${lang}.yoursite.com/${lang}/detail/${objectID}`;
+  const loc = url({ lang: 'en', objectID });
+  const lastmod = new Date().toISOString();
+  const priority = Math.random();
+  return {
+    loc,
+    lastmod,
+    priority,
+    videos: [
+      {
+        title: name,
+        description: videoDescription,
+        thumbnail_loc: videoThumbnail,
+        content_loc: videoFile
+      },
+    ],
+    alternates: {
+      languages: ['fr', 'pt-BR', 'zh-Hans'],
+      hitToURL: lang => url({ lang, objectID }),
+    },
+  };
+}
+```
+
+For more information, see https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps
 
 ## Custom queries
 
