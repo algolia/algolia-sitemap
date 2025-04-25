@@ -42,7 +42,7 @@ function init({
     batch = chunk;
   };
 
-  const aggregator = (() => {
+  const aggregator = async () => {
     var _ref3 = _asyncToGenerator2(function* (args) {
       let hits = args.hits,
           cursor = args.cursor;
@@ -78,7 +78,7 @@ function init({
     return function aggregator(_x2) {
       return _ref3.apply(this, arguments);
     };
-  })();
+  };
 
   return index.browse(params).then(aggregator);
 }
